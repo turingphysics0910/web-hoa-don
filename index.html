@@ -60,7 +60,7 @@
             box-shadow: inset 0 0 20px rgba(255,255,255,0.5);
         }
         
-        /* 1. Header: Avatar & Tên thương hiệu SẮC NÉT */
+        /* 1. Header: Avatar & Tên thương hiệu (Đã giảm sáng, êm dịu) */
         .inv-header { display: flex; align-items: center; margin-bottom: 30px; position: relative; }
         .inv-avatar { 
             width: 90px; height: 90px; border-radius: 50%; object-fit: cover;
@@ -78,9 +78,10 @@
             border-radius: 50px; 
             display: inline-block;
             letter-spacing: 1px;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
-            box-shadow: 0 0 15px rgba(2, 132, 199, 0.5), inset 0 0 8px rgba(255, 255, 255, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.6);
+            /* Bóng chữ nhẹ nhàng, viền thanh thoát */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 10px rgba(2, 132, 199, 0.2);
+            border: 2px solid #bae6fd;
         }
 
         /* 2. Tiêu đề, Thời gian, Khách hàng */
@@ -94,10 +95,9 @@
         }
         .inv-customer span { font-weight: bold; color: #0284c7; }
         
-        /* ĐÃ CHỈNH SỬA: Ép SĐT và Email thành màu đen tuyền và in đậm tối đa */
         .inv-contact { font-size: 17px; margin-top: 8px; }
         .inv-contact b { color: #0284c7; font-weight: bold; }
-        .contact-val { color: #000000; font-weight: 900; } /* Lớp này làm cho SĐT/Email nét căng */
+        .contact-val { color: #000000; font-weight: 900; } 
 
         /* 3. Bảng dữ liệu */
         .table-wrapper {
@@ -126,7 +126,7 @@
         
         .col-total-val { font-weight: bold; color: #dc2626; } 
 
-        /* 4. Tổng thanh toán đóng khung bo tròn */
+        /* 4. Tổng thanh toán */
         .inv-total-wrapper { text-align: right; margin-bottom: 30px; padding-top: 10px; }
         .inv-total-text { font-size: 18px; font-weight: bold; color: #0369a1; display: inline-block; margin-right: 15px; text-transform: uppercase; }
         .inv-total-box {
@@ -143,7 +143,7 @@
             box-shadow: 0 4px 10px rgba(239, 68, 68, 0.15);
         }
 
-        /* 5. Mã QR & Thông tin Ngân hàng thiết kế nằm ngang */
+        /* 5. Mã QR, Ngân hàng & Zalo */
         .inv-footer { display: flex; flex-direction: column; align-items: center; border-top: 2px dashed #7dd3fc; padding-top: 25px; }
         
         .payment-section {
@@ -174,7 +174,25 @@
 
         .thanks-section { text-align: center; width: 100%; margin-top: 10px; }
         .thanks-text { font-size: 20px; font-weight: bold; color: #0284c7; margin-bottom: 8px; text-shadow: 1px 1px 0px #fff;}
-        .wish-text { font-size: 18px; font-style: italic; color: #0369a1; }
+        .wish-text { font-size: 18px; font-style: italic; color: #0369a1; margin-bottom: 15px; }
+
+        /* Nút thông tin Zalo tĩnh */
+        .zalo-contact {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 8px 20px;
+            background: #ffffff;
+            border: 2px solid #bae6fd;
+            border-radius: 50px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .zalo-text {
+            font-size: 18px;
+            font-weight: bold;
+            color: #0068ff; /* Màu xanh chuẩn của Zalo */
+        }
 
         @media (min-width: 500px) {
             .input-group { grid-template-columns: 2fr 1fr 1.5fr; }
@@ -265,13 +283,20 @@
                 <div class="bank-info">
                     <div><strong>Ngân hàng:</strong> <span>MB Bank</span></div>
                     <div><strong>Tên chủ TK:</strong> <span>TRẦN GIA BẢO</span></div>
-                    <div><strong>STK:</strong> <span style="color: #dc2626; font-size: 20px;">0338844985</span></div>
+                    <div><strong>STK:</strong> <span style="color: #dc2626; font-size: 20px;">03388449856</span></div>
                 </div>
             </div>
             
             <div class="thanks-section">
                 <div class="thanks-text">Xin chân thành cảm ơn quý thầy cô !</div>
                 <div class="wish-text">Chúc quý thầy cô sức khỏe và thuận lợi !</div>
+                
+                <div class="zalo-contact">
+                    <svg viewBox="0 0 24 24" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="#0068ff">
+                        <path d="M21.543 10.606c0-4.63-4.526-8.384-10.106-8.384-5.578 0-10.104 3.753-10.104 8.384 0 2.505 1.325 4.764 3.425 6.275l-1.393 4.195c-.173.522.392.932.846.611l4.57-3.23c.854.214 1.748.331 2.656.331 5.58 0 10.106-3.755 10.106-8.384v-.002l.002.004zM8.196 13.918H5.66v-.483l1.83-2.18h-1.83V10.22h2.536v.481l-1.83 2.18h1.83v1.037zm3.176.012c-.996 0-1.748-.688-1.748-1.823s.752-1.821 1.748-1.821c.996 0 1.746.686 1.746 1.821s-.75 1.823-1.746 1.823zm0-2.834c-.538 0-.914.372-.914.996 0 .622.376.994.914.994.537 0 .911-.372.911-.994s-.374-.996-.911-.996zm3.901 2.822h-1.02V10.22h1.02v3.698zm2.25 0c-.994 0-1.746-.688-1.746-1.823s.752-1.821 1.746-1.821c.995 0 1.747.686 1.747 1.821s-.752 1.823-1.747 1.823zm0-2.834c-.537 0-.913.372-.913.996 0 .622.376.994.913.994.538 0 .913-.372.913-.994s-.375-.996-.913-.996z"/>
+                    </svg>
+                    <span class="zalo-text">Zalo: 0843.589.647</span>
+                </div>
             </div>
         </div>
     </div>
@@ -358,7 +383,6 @@
         const contactDiv = document.getElementById('outCustomerContact');
         let contactArr = [];
         
-        // Đã bọc SĐT và Email vào thẻ span có class "contact-val" để ép màu đen và in đậm
         if(phone) contactArr.push(`<b>SĐT:</b> <span class="contact-val">${phone}</span>`);
         if(email) contactArr.push(`<b>Email:</b> <span class="contact-val">${email}</span>`);
         
