@@ -3,184 +3,235 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tạo Hóa Đơn Bán Hàng Chuyên Nghiệp</title>
+    <title>Hóa Đơn - TURING PHYSICS</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px; background-color: #f4f6f9; color: #333; }
-        .container { max-width: 480px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
-        h2 { text-align: center; margin-bottom: 20px; color: #2c3e50; font-size: 22px; text-transform: uppercase; letter-spacing: 0.5px; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px; background-color: #f0f2f5; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; background: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        h2 { text-align: center; color: #1a202c; margin-bottom: 20px; }
         
-        /* Giao diện các ô nhập liệu */
-        .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; font-weight: 600; margin-bottom: 6px; font-size: 14px; color: #4a5568; }
-        .form-group input { width: 100%; padding: 12px; font-size: 15px; border-radius: 6px; border: 1px solid #cbd5e1; outline: none; transition: all 0.2s; }
-        .form-group input:focus { border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15); }
+        /* Khu vực nhập liệu */
+        .config-box { background: #e2e8f0; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
+        .config-box label { font-weight: bold; }
+        .config-box select { padding: 8px; margin-left: 10px; border-radius: 5px; border: 1px solid #ccc; font-size: 16px; width: 100px; }
         
-        /* Nút bấm */
-        button { width: 100%; padding: 14px; margin-top: 10px; font-size: 16px; border-radius: 6px; border: none; cursor: pointer; font-weight: bold; transition: background 0.2s; }
+        .product-row { background: #f8fafc; border: 1px solid #cbd5e1; padding: 15px; border-radius: 8px; margin-bottom: 15px; }
+        .product-row h4 { margin-bottom: 10px; color: #3b82f6; }
+        .input-group { display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 10px; }
+        .input-group input { padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 15px; }
+        .row-subtotal { font-weight: bold; color: #ef4444; text-align: right; }
+        
+        button { width: 100%; padding: 14px; font-size: 16px; border-radius: 6px; border: none; cursor: pointer; font-weight: bold; transition: 0.2s; }
         .btn-preview { background-color: #3b82f6; color: white; }
         .btn-preview:hover { background-color: #2563eb; }
-        .btn-download { background-color: #10b981; color: white; display: none; margin-top: 20px; }
+        .btn-download { background-color: #10b981; color: white; display: none; margin-top: 15px; }
         .btn-download:hover { background-color: #059669; }
-        
-        /* Khu vực hiển thị tờ hóa đơn để chụp ảnh */
+
+        /* KHU VỰC HÓA ĐƠN */
         #invoice-box {
             background: #ffffff;
-            padding: 30px;
-            border: 2px dashed #cbd5e1;
-            border-radius: 8px;
-            margin-top: 25px;
-            text-align: center;
-            display: none; /* Ẩn lúc mới vào, chỉ hiện khi bấm xem trước */
+            padding: 40px 30px;
+            border: 1px solid #e2e8f0;
+            margin-top: 30px;
+            display: none; /* Ẩn khi chưa bấm tạo */
+            position: relative;
         }
-        .invoice-header { font-size: 24px; font-weight: 800; color: #1e293b; margin-bottom: 5px; text-transform: uppercase; }
-        .invoice-sub { font-size: 13px; color: #64748b; margin-bottom: 20px; }
+        /* Style cho hóa đơn */
+        .inv-header { text-align: center; margin-bottom: 25px; }
+        .inv-brand { font-size: 28px; font-weight: 900; color: #0f172a; letter-spacing: 2px; margin-bottom: 5px; }
+        .inv-date { font-size: 14px; font-style: italic; color: #64748b; }
         
-        /* Bảng chi tiết tính tiền bên trong hóa đơn */
-        .invoice-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; text-align: left; font-size: 15px; }
-        .invoice-table th { padding: 8px 0; border-bottom: 2px solid #edf2f7; color: #718096; font-weight: 600; }
-        .invoice-table td { padding: 12px 0; border-bottom: 1px solid #edf2f7; color: #2d3748; }
+        .inv-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 15px; }
+        .inv-table th { border-bottom: 2px solid #cbd5e1; padding: 10px 5px; text-align: left; color: #475569; }
+        .inv-table td { border-bottom: 1px dashed #e2e8f0; padding: 12px 5px; color: #1e293b; }
+        .text-center { text-align: center; }
         .text-right { text-align: right; }
         
-        .total-section { text-align: right; margin-top: 10px; padding-top: 10px; font-size: 16px; color: #1a202c; }
-        .total-price { font-size: 20px; font-weight: bold; color: #ef4444; }
+        .inv-total { text-align: right; font-size: 18px; margin-top: 15px; font-weight: bold; color: #0f172a; }
+        .inv-total span { color: #ef4444; font-size: 22px; margin-left: 10px; }
         
-        /* Vùng chứa mã QR */
-        .qr-section { margin-top: 20px; padding-top: 15px; border-top: 1px dashed #e2e8f0; }
-        .qr-title { font-size: 14px; font-weight: 600; color: #4a5568; margin-bottom: 10px; }
-        .qr-code { width: 190px; height: 190px; object-fit: contain; border: 1px solid #e2e8f0; padding: 6px; background: #fff; border-radius: 4px; }
-        .footer-text { font-size: 13px; color: #94a3b8; margin-top: 15px; font-style: italic; }
+        /* Chỗ để mã QR */
+        .inv-footer { display: flex; justify-content: space-between; align-items: flex-end; margin-top: 30px; border-top: 2px solid #f1f5f9; padding-top: 20px; }
+        .qr-area { text-align: center; }
+        .qr-area img { width: 120px; height: 120px; object-fit: contain; border: 1px solid #ccc; border-radius: 8px; padding: 5px; }
+        .qr-text { font-size: 13px; font-weight: bold; margin-bottom: 8px; color: #333; }
+        .thank-you { font-size: 15px; font-style: italic; color: #64748b; }
+
+        /* Responsive cho điện thoại */
+        @media (min-width: 480px) {
+            .input-group { grid-template-columns: 2fr 1fr 1fr; }
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>TẠO HÓA ĐƠN NHANH</h2>
+    <h2>TẠO HÓA ĐƠN</h2>
     
-    <div class="form-group">
-        <label for="inputName">Tên sản phẩm / mặt hàng:</label>
-        <input type="text" id="inputName" placeholder="Ví dụ: Áo khoác Bomber thời trang">
-    </div>
-    
-    <div class="form-group">
-        <label for="inputPrice">Đơn giá (VNĐ):</label>
-        <input type="number" id="inputPrice" placeholder="Ví dụ: 250000">
-    </div>
-    
-    <div class="form-group">
-        <label for="inputQty">Số lượng mua:</label>
-        <input type="number" id="inputQty" value="1" min="1" placeholder="Ví dụ: 1">
+    <div class="config-box">
+        <label for="numItems">Chọn số loại sản phẩm cần bán:</label>
+        <select id="numItems" onchange="generateInputFields()">
+            <option value="0">-- Chọn --</option>
+            <option value="1">1 loại</option>
+            <option value="2">2 loại</option>
+            <option value="3">3 loại</option>
+            <option value="4">4 loại</option>
+            <option value="5">5 loại</option>
+        </select>
     </div>
 
-    <button class="btn-preview" onclick="generateInvoice()">✨ Xem trước Hóa Đơn</button>
+    <div id="dynamic-inputs"></div>
+
+    <button class="btn-preview" onclick="buildInvoice()">✨ Tạo Hóa Đơn</button>
 
     <div id="invoice-box">
-        <div class="invoice-header">HÓA ĐƠN BÁN HÀNG</div>
-        <div class="invoice-sub">Cảm ơn bạn đã ủng hộ shop!</div>
+        <div class="inv-header">
+            <div class="inv-brand">TURING PHYSICS</div>
+            <div class="inv-date" id="invDate">Ngày xuất hóa đơn: ...</div>
+        </div>
         
-        <table class="invoice-table">
+        <table class="inv-table">
             <thead>
                 <tr>
                     <th>Tên sản phẩm</th>
-                    <th class="text-right" style="width: 70px;">SL</th>
-                    <th class="text-right" style="width: 110px;">Thành tiền</th>
+                    <th class="text-center" style="width: 50px;">SL</th>
+                    <th class="text-right">Đơn giá</th>
+                    <th class="text-right">Thành tiền</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td id="outName" style="font-weight: 500; word-break: break-word;">...</td>
-                    <td id="outQty" class="text-right">0</td>
-                    <td id="outSubtotal" class="text-right">0đ</td>
-                </tr>
-            </tbody>
+            <tbody id="invTableBody">
+                </tbody>
         </table>
         
-        <div class="total-section">
-            <p>Tổng thanh toán: <span id="outTotal" class="total-price">0</span> <span style="color: #ef4444; font-weight: bold;">VNĐ</span></p>
+        <div class="inv-total">
+            Tổng cộng: <span id="invGrandTotal">0</span> VNĐ
         </div>
         
-        <div class="qr-section">
-            <p class="qr-title">Quét mã QR dưới đây để thanh toán</p>
-            <img src="ma-qr-cua-toi.jpg" alt="Mã QR Thanh Toán" class="qr-code">
+        <div class="inv-footer">
+            <div class="thank-you">
+                Trân trọng cảm ơn!<br>Chúc bạn học tập thật tốt.
+            </div>
+            <div class="qr-area">
+                <div class="qr-text">Quét mã thanh toán</div>
+                <img src="ma-qr-cua-toi.jpg" alt="Mã QR">
+            </div>
         </div>
-        
-        <p class="footer-text">Hóa đơn được khởi tạo tự động</p>
     </div>
 
-    <button id="downloadBtn" class="btn-download" onclick="downloadInvoice()">⬇️ Tải Ảnh Hóa Đơn Về Máy</button>
+    <button id="downloadBtn" class="btn-download" onclick="downloadInvoice()">⬇️ Tải Ảnh Hóa Đơn Về</button>
 </div>
 
 <script>
-    // Hàm xử lý khi bấm nút "Xem trước Hóa Đơn"
-    function generateInvoice() {
-        const name = document.getElementById('inputName').value.trim();
-        const price = parseFloat(document.getElementById('inputPrice').value);
-        const qty = parseInt(document.getElementById('inputQty').value);
+    // 1. Hàm tự động tạo ô nhập liệu khi chọn số lượng
+    function generateInputFields() {
+        const num = parseInt(document.getElementById('numItems').value);
+        const container = document.getElementById('dynamic-inputs');
+        container.innerHTML = ''; // Xóa sạch ô cũ nếu chọn lại
         
-        // Kiểm tra dữ liệu đầu vào xem đã nhập đủ chưa
-        if (!name) {
-            alert("Vui lòng nhập tên sản phẩm bạn ơi!");
-            return;
+        for(let i = 1; i <= num; i++) {
+            container.innerHTML += `
+                <div class="product-row">
+                    <h4>Mặt hàng thứ ${i}</h4>
+                    <div class="input-group">
+                        <input type="text" id="name_${i}" placeholder="Tên sản phẩm (VD: Sách Luyện Đề)">
+                        <input type="number" id="qty_${i}" placeholder="Số lượng" min="1" oninput="calcRowSubtotal(${i})">
+                        <input type="number" id="price_${i}" placeholder="Giá 1 SP (VNĐ)" min="0" oninput="calcRowSubtotal(${i})">
+                    </div>
+                    <div class="row-subtotal">Thành tiền: <span id="subtotal_${i}">0</span> đ</div>
+                </div>
+            `;
         }
-        if (isNaN(price) || price <= 0) {
-            alert("Vui lòng nhập giá tiền hợp lệ lớn hơn 0 nhé!");
-            return;
-        }
-        if (isNaN(qty) || qty <= 0) {
-            alert("Vui lòng nhập số lượng lớn hơn 0 nhé!");
+    }
+
+    // 2. Hàm tính tiền trực tiếp cho từng dòng khi đang gõ
+    function calcRowSubtotal(index) {
+        const qty = parseFloat(document.getElementById(`qty_${index}`).value) || 0;
+        const price = parseFloat(document.getElementById(`price_${index}`).value) || 0;
+        const sub = qty * price;
+        document.getElementById(`subtotal_${index}`).innerText = sub.toLocaleString('vi-VN');
+    }
+
+    // 3. Hàm tạo hóa đơn hoàn chỉnh
+    function buildInvoice() {
+        const num = parseInt(document.getElementById('numItems').value);
+        if (num === 0 || isNaN(num)) {
+            alert("Vui lòng chọn số lượng mặt hàng trước nhé!");
             return;
         }
 
-        // Tính toán số tiền
-        const totalAmount = price * qty;
+        const tbody = document.getElementById('invTableBody');
+        tbody.innerHTML = ''; // Làm sạch bảng
+        let grandTotal = 0;
+        let hasError = false;
 
-        // Đổ dữ liệu tính toán được vào giao diện tờ hóa đơn ở dưới
-        document.getElementById('outName').innerText = name;
-        document.getElementById('outQty').innerText = qty;
-        document.getElementById('outSubtotal').innerText = totalAmount.toLocaleString('vi-VN') + 'đ';
-        document.getElementById('outTotal').innerText = totalAmount.toLocaleString('vi-VN');
+        // Quét qua các ô nhập liệu để lấy dữ liệu
+        for(let i = 1; i <= num; i++) {
+            const name = document.getElementById(`name_${i}`).value.trim();
+            const qty = parseFloat(document.getElementById(`qty_${i}`).value);
+            const price = parseFloat(document.getElementById(`price_${i}`).value);
+            
+            if(!name || isNaN(qty) || isNaN(price)) {
+                hasError = true;
+                break;
+            }
 
-        // Hiển thị khung hóa đơn và nút tải ảnh lên màn hình
-        document.getElementById('invoice-box').style.style.display = 'block';
+            const subtotal = qty * price;
+            grandTotal += subtotal;
+
+            // Thêm hàng vào bảng hóa đơn
+            tbody.innerHTML += `
+                <tr>
+                    <td style="font-weight: 500;">${name}</td>
+                    <td class="text-center">${qty}</td>
+                    <td class="text-right">${price.toLocaleString('vi-VN')}</td>
+                    <td class="text-right" style="font-weight: bold;">${subtotal.toLocaleString('vi-VN')}</td>
+                </tr>
+            `;
+        }
+
+        if(hasError) {
+            alert("Bạn điền thiếu thông tin (tên, số lượng hoặc giá) ở mặt hàng nào đó rồi. Vui lòng kiểm tra lại!");
+            return;
+        }
+
+        // Tạo ngày tháng tự động
+        const today = new Date();
+        const dateString = `Ngày xuất hóa đơn: ${today.getDate().toString().padStart(2, '0')}/${(today.getMonth() + 1).toString().padStart(2, '0')}/${today.getFullYear()}`;
+        document.getElementById('invDate').innerText = dateString;
+
+        // Cập nhật tổng tiền
+        document.getElementById('invGrandTotal').innerText = grandTotal.toLocaleString('vi-VN');
+
+        // Hiển thị hóa đơn
+        document.getElementById('invoice-box').style.display = 'block';
         document.getElementById('downloadBtn').style.display = 'block';
-        
-        // Cuộn nhẹ màn hình xuống dưới để người dùng thấy hóa đơn vừa tạo
         document.getElementById('invoice-box').scrollIntoView({ behavior: 'smooth' });
     }
 
-    // Hàm chụp ảnh vùng hóa đơn và tự động tải xuống
+    // 4. Hàm chụp ảnh tải về
     function downloadInvoice() {
         const invoice = document.getElementById('invoice-box');
         const btn = document.getElementById('downloadBtn');
         
-        // Đổi trạng thái nút để người dùng biết hệ thống đang xử lý
-        btn.innerText = "⏳ Đang khởi tạo ảnh...";
-        btn.style.backgroundColor = "#6b7280";
+        btn.innerText = "⏳ Đang xử lý ảnh...";
         btn.disabled = true;
         
-        // Tiến hành chụp ảnh thẻ div chứa hóa đơn
         html2canvas(invoice, {
             useCORS: true, 
-            scale: 3, // Tăng scale lên 3 để xuất ảnh nét căng, không bị vỡ chữ khi gửi qua Zalo/Facebook
-            backgroundColor: "#ffffff" // Đảm bảo nền ảnh luôn là màu trắng sạch sẽ
+            scale: 3, 
+            backgroundColor: "#ffffff"
         }).then(canvas => {
-            // Tạo link tải ảnh ngầm
             const link = document.createElement('a');
-            // Tự động đặt tên file ảnh tải về theo tên sản phẩm cho dễ quản lý
-            const fileNameStr = document.getElementById('inputName').value.trim().replace(/\s+/g, '-');
-            link.download = `HD-${fileNameStr || 'Thanh-Toan'}.png`;
+            link.download = `Hoa-Don-Turing-Physics.png`;
             link.href = canvas.toDataURL('image/png');
             link.click();
             
-            // Khôi phục lại trạng thái nút bấm sau khi tải xong
-            btn.innerText = "⬇️ Tải Ảnh Hóa Đơn Về Máy";
-            btn.style.backgroundColor = "#10b981";
+            btn.innerText = "⬇️ Tải Ảnh Hóa Đơn Về";
             btn.disabled = false;
         }).catch(err => {
-            alert("Có lỗi xảy ra khi tạo ảnh, bạn vui lòng kiểm tra lại file ảnh QR nhé!");
-            btn.innerText = "⬇️ Tải Ảnh Hóa Đơn Về Máy";
-            btn.style.backgroundColor = "#10b981";
+            alert("Lỗi tạo ảnh. Vui lòng thử lại!");
+            btn.innerText = "⬇️ Tải Ảnh Hóa Đơn Về";
             btn.disabled = false;
         });
     }
