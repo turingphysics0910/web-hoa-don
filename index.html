@@ -15,7 +15,7 @@
         body { 
             font-family: 'Lora', serif; 
             padding: 15px; 
-            background-color: #f0f9ff; /* Xanh da trời rất nhạt làm nền web */
+            background-color: #f0f9ff; 
             color: #1e293b; 
         }
         
@@ -73,40 +73,44 @@
             box-shadow: inset 0 0 15px rgba(255,255,255,0.6);
         }
         
-        /* 1. Header */
+        /* 1. Header: Đã cấu trúc lại để Thương hiệu NÉT CĂNG */
         .inv-header { 
             display: flex; 
             align-items: center; 
             justify-content: center; 
-            margin-bottom: 25px; 
+            margin-bottom: 30px; 
             position: relative; 
             min-height: 80px;
         }
         .inv-avatar { 
-            width: 75px; height: 75px; border-radius: 50%; object-fit: cover;
+            width: 80px; height: 80px; border-radius: 50%; object-fit: cover;
             border: 3px solid #ffffff; position: absolute; left: 0; background-color: #fff;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-            z-index: 2;
+            box-shadow: 0 0 15px rgba(2, 132, 199, 0.3);
+            z-index: 10;
         }
         .inv-brand { 
-            background: linear-gradient(135deg, #0ea5e9, #0284c7); 
+            background: #0284c7; /* Nền xanh đậm hơn để làm nổi bật chữ trắng */
             color: #ffffff; 
-            font-size: 24px; 
-            font-weight: 700; 
+            font-size: 26px; 
+            font-weight: 900; 
             padding: 12px 35px; 
-            border-radius: 50px; /* BO TRÒN PHÁT SÁNG */
+            border-radius: 50px; /* Bo tròn hoàn toàn */
             display: inline-block;
-            letter-spacing: 1px;
-            text-shadow: 0 0 8px rgba(255,255,255,0.8); 
-            box-shadow: 0 0 18px #38bdf8, inset 0 0 8px rgba(255,255,255,0.3);
-            border: 2px solid #e0f2fe;
+            letter-spacing: 1.5px;
+            border: 2px solid #ffffff; /* Viền trắng nét căng */
+            /* Bóng đổ khối cứng (3D) để html2canvas chụp không bị mờ */
+            text-shadow: 1px 1px 0px #0369a1, 2px 2px 0px #0369a1, 3px 3px 0px #0369a1; 
+            /* Phát sáng viền ngoài của khung (Màu xanh da trời) */
+            box-shadow: 0 0 20px rgba(2, 132, 199, 0.5), 0 4px 6px rgba(0,0,0,0.1);
             margin: 0 auto;
+            position: relative;
+            z-index: 5;
         }
 
         /* 2. Tiêu đề, Thời gian, Khách hàng */
         .inv-title-section { text-align: center; margin-bottom: 20px; border-bottom: 2px dashed #7dd3fc; padding-bottom: 15px; }
         .inv-main-title { font-size: 20px; font-weight: 700; color: #0284c7; margin-bottom: 5px; text-shadow: 1px 1px 0px #fff; }
-        .inv-datetime { font-size: 15px; color: #0ea5e9; font-weight: 700; margin-bottom: 12px; }
+        .inv-datetime { font-size: 15px; color: #0ea5e9; font-weight: 700; margin-bottom: 15px; }
         
         .inv-customer { 
             font-size: 17px; background: rgba(255,255,255,0.95); 
@@ -115,9 +119,9 @@
             width: 100%;
         }
         
-        /* Cấu hình màu cho Tiêu đề và Nội dung nhập */
-        .label-blue { color: #0ea5e9; font-weight: 700; } /* Màu xanh nhạt cho chữ Khách hàng, SĐT, Email */
-        .val-normal { color: #000000; font-weight: 400; word-break: break-word; } /* Màu đen, mỏng bình thường cho dữ liệu */
+        /* Cấu hình màu chuẩn: Tiêu đề Xanh nhạt - Nội dung Đen mỏng */
+        .label-blue { color: #0ea5e9; font-weight: 700; } 
+        .val-normal { color: #000000; font-weight: 400; word-break: break-word; } 
         .contact-line { margin-top: 6px; }
 
         /* 3. Bảng dữ liệu */
@@ -131,7 +135,7 @@
         }
         .inv-table { width: 100%; border-collapse: collapse; font-size: 15px; }
         .inv-table th { 
-            background-color: #0ea5e9; /* Xanh da trời */
+            background-color: #0ea5e9; 
             color: #ffffff !important; 
             padding: 12px 6px; 
             font-size: 15px; 
@@ -403,7 +407,7 @@
             return;
         }
 
-        // Tạo chuỗi thông tin khách hàng: Tiêu đề xanh nhạt, Data đen mỏng
+        // Đã cập nhật định dạng: Label Xanh nhạt đậm, Data Đen mỏng bình thường
         let customerHtml = `<div><span class="label-blue">Khách hàng:</span> <span class="val-normal">${customerTitle} ${customerName}</span></div>`;
         if(phone) customerHtml += `<div class="contact-line"><span class="label-blue">SĐT:</span> <span class="val-normal">${phone}</span></div>`;
         if(email) customerHtml += `<div class="contact-line"><span class="label-blue">Email:</span> <span class="val-normal">${email}</span></div>`;
