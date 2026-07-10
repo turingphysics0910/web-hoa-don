@@ -7,197 +7,212 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px; background-color: #f0f2f5; color: #333; }
-        .container { max-width: 680px; margin: 0 auto; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-        h2 { text-align: center; color: #1a202c; margin-bottom: 20px; text-transform: uppercase; font-weight: 800; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px; background-color: #e2e8f0; color: #1e293b; }
+        .container { max-width: 700px; margin: 0 auto; background: #ffffff; padding: 25px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        h2 { text-align: center; color: #0f172a; margin-bottom: 25px; font-weight: 800; letter-spacing: 1px; }
         
-        /* Khu vực cấu hình và nhập liệu */
-        .config-box { background: #f8fafc; border: 1px solid #cbd5e1; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
-        .config-box label { font-weight: 600; font-size: 14px; color: #334155; display: block; margin-bottom: 6px; }
-        .input-row { display: grid; grid-template-columns: 1fr 2fr; gap: 15px; margin-bottom: 15px; }
-        .input-row select, .input-row input, .select-items { width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #cbd5e1; font-size: 15px; outline: none; transition: border 0.2s; }
-        .input-row input:focus, .input-row select:focus { border-color: #0284c7; }
+        /* === KHU VỰC NHẬP LIỆU === */
+        .config-box { background: #f8fafc; border: 1px solid #e2e8f0; padding: 20px; border-radius: 10px; margin-bottom: 20px; }
+        .config-box label { font-weight: 600; font-size: 14px; color: #334155; display: block; margin-bottom: 8px; }
+        .input-row { display: grid; grid-template-columns: 100px 1fr; gap: 15px; margin-bottom: 15px; }
+        .input-row select, .input-row input, .select-items { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #cbd5e1; font-size: 15px; outline: none; }
+        .input-row input:focus, .input-row select:focus, .select-items:focus { border-color: #0284c7; box-shadow: 0 0 0 3px rgba(2,132,199,0.1); }
         
-        .product-row { background: #ffffff; border: 1px solid #e2e8f0; padding: 15px; border-radius: 8px; margin-bottom: 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
-        .product-row h4 { margin-bottom: 10px; color: #0284c7; font-size: 15px; }
-        .input-group { display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 10px; }
-        .input-group input { padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 15px; outline: none; }
-        .input-group input:focus { border-color: #3b82f6; }
-        .row-subtotal { font-weight: bold; color: #ef4444; text-align: right; font-size: 14px; }
+        .product-row { background: #ffffff; border: 1px solid #e2e8f0; padding: 18px; border-radius: 10px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
+        .product-row h4 { margin-bottom: 12px; color: #0284c7; font-size: 15px; text-transform: uppercase; }
+        .input-group { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 12px; }
+        .input-group input { padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 15px; outline: none; }
+        .input-group input:focus { border-color: #0284c7; }
+        .row-subtotal { font-weight: bold; color: #dc2626; text-align: right; font-size: 15px; }
         
-        button { width: 100%; padding: 14px; font-size: 16px; border-radius: 6px; border: none; cursor: pointer; font-weight: bold; transition: 0.2s; margin-top: 10px; }
-        .btn-preview { background-color: #0284c7; color: white; }
-        .btn-preview:hover { background-color: #0369a1; }
-        .btn-download { background-color: #10b981; color: white; display: none; margin-top: 20px; }
-        .btn-download:hover { background-color: #059669; }
+        button { width: 100%; padding: 15px; font-size: 16px; border-radius: 8px; border: none; cursor: pointer; font-weight: bold; transition: all 0.2s; margin-top: 10px; text-transform: uppercase; letter-spacing: 1px; }
+        .btn-preview { background-color: #0f172a; color: white; }
+        .btn-preview:hover { background-color: #1e293b; transform: translateY(-2px); }
+        .btn-download { background-color: #059669; color: white; display: none; margin-top: 25px; }
+        .btn-download:hover { background-color: #047857; }
 
-        /* ================= KHU VỰC HÓA ĐƠN ĐÃ CẢI TIẾN ================= */
+        /* === KHU VỰC PHÔI HÓA ĐƠN === */
         #invoice-box {
-            background-color: #f0f9ff; 
-            background-image: radial-gradient(#bae6fd 1px, transparent 1px);
-            background-size: 15px 15px;
-            padding: 35px;
-            border: 1px solid #bae6fd;
+            background-color: #ffffff;
+            padding: 40px;
+            border: 1px solid #cbd5e1;
             border-radius: 12px;
-            margin-top: 30px;
+            margin-top: 35px;
             display: none; 
             color: #0f172a;
+            position: relative;
+            box-shadow: inset 0 0 0 2px #f8fafc, 0 4px 20px rgba(0,0,0,0.05);
         }
         
-        .invoice-content-wrapper {
-            background: #ffffff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(2, 132, 199, 0.1);
-            border-top: 6px solid #0284c7;
+        /* 1. Phần Header: Avatar & Tên thương hiệu */
+        .inv-header { display: flex; align-items: center; margin-bottom: 30px; position: relative; }
+        .inv-avatar { 
+            width: 80px; 
+            height: 80px; 
+            border-radius: 50%; /* Bo tròn ảnh */
+            object-fit: cover;
+            border: 3px solid #0284c7;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: absolute; /* Giữ cố định bên trái */
+            left: 0;
+        }
+        .inv-brand-wrapper { width: 100%; text-align: center; } /* Đưa tên ra giữa */
+        .inv-brand { 
+            background: linear-gradient(135deg, #0f172a, #0284c7); 
+            color: white; 
+            font-size: 26px; 
+            font-weight: 900; 
+            padding: 10px 30px; 
+            border-radius: 50px; /* Bo tròn các góc chữ */
+            display: inline-block;
+            letter-spacing: 2px;
+            box-shadow: 0 4px 10px rgba(2,132,199,0.3);
         }
 
-        .inv-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 25px; border-bottom: 2px solid #e0f2fe; padding-bottom: 15px; }
-        .inv-brand { font-size: 32px; font-weight: 900; color: #0284c7; letter-spacing: 1.5px; line-height: 1; }
-        .inv-date { font-size: 14px; color: #64748b; text-align: right; }
-        
-        .inv-customer { background: #f8fafc; padding: 12px 15px; border-radius: 6px; margin-bottom: 25px; border-left: 4px solid #0284c7; font-size: 16px; color: #1e293b; }
-        .inv-customer span { font-weight: bold; color: #0284c7; }
-        
-        .inv-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 15px; }
-        .inv-table th { border-bottom: 2px solid #bae6fd; padding: 10px 8px; text-align: left; color: #0369a1; text-transform: uppercase; font-size: 13px; }
-        .inv-table td { border-bottom: 1px solid #f1f5f9; padding: 14px 8px; color: #334155; font-weight: 500; }
+        /* 2. Tiêu đề, Thời gian, Khách hàng */
+        .inv-title-section { text-align: center; margin-bottom: 25px; border-bottom: 2px dashed #cbd5e1; padding-bottom: 20px; }
+        .inv-main-title { font-size: 20px; font-weight: 800; color: #0f172a; margin-bottom: 8px; }
+        .inv-datetime { font-size: 15px; color: #475569; font-family: 'Courier New', Courier, monospace; font-weight: bold; margin-bottom: 12px; }
+        .inv-customer { font-size: 17px; color: #1e293b; background: #f0f9ff; display: inline-block; padding: 8px 20px; border-radius: 6px; border-left: 4px solid #0284c7; }
+        .inv-customer span { font-weight: 700; color: #0284c7; }
+
+        /* 3. Bảng dữ liệu */
+        .inv-table { width: 100%; border-collapse: collapse; margin-bottom: 25px; font-size: 15px; border: 1px solid #e2e8f0; }
+        .inv-table th { background-color: #0f172a; color: #ffffff; padding: 12px 10px; text-align: left; font-size: 14px; border: 1px solid #1e293b; }
+        .inv-table td { padding: 14px 10px; border: 1px solid #e2e8f0; color: #334155; font-weight: 500; }
+        .inv-table tr:nth-child(even) { background-color: #f8fafc; } /* Tạo vân sọc cho bảng dễ nhìn */
         .text-center { text-align: center; }
         .text-right { text-align: right; }
-        
-        .inv-total-box { display: flex; justify-content: flex-end; align-items: center; padding-top: 15px; border-top: 2px dashed #cbd5e1; margin-bottom: 30px; }
-        .inv-total-text { font-size: 16px; font-weight: bold; color: #475569; margin-right: 15px; text-transform: uppercase; }
-        .inv-total-amount { font-size: 26px; font-weight: 900; color: #ef4444; }
-        
-        /* Bố cục Footer lấp đầy khoảng trống */
-        .inv-footer { display: flex; justify-content: space-between; align-items: stretch; background: #f8fafc; padding: 20px; border-radius: 10px; border: 1px solid #e2e8f0; }
-        
-        .footer-left { display: flex; flex-direction: column; justify-content: center; width: 55%; }
-        .thank-you { font-size: 17px; line-height: 1.6; color: #0369a1; }
-        .thank-you strong { font-size: 19px; display: block; margin-bottom: 8px; color: #0284c7; }
-        
-        .footer-right { width: 45%; display: flex; flex-direction: column; align-items: flex-end; justify-content: center; border-left: 2px dashed #cbd5e1; padding-left: 20px; }
-        .qr-text { font-size: 13px; font-weight: bold; margin-bottom: 10px; color: #475569; text-transform: uppercase; letter-spacing: 0.5px; }
-        
-        /* Cố định khung QR hình vuông hoàn hảo */
-        .qr-square-box {
-            width: 150px; 
-            height: 150px; 
-            background: #ffffff;
-            border: 3px solid #0284c7;
-            border-radius: 10px;
-            overflow: hidden; /* Giữ ảnh không bị tràn ra ngoài */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 5px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
-        .qr-square-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain; /* Ép ảnh vừa vặn trong ô vuông */
+        .col-name { width: 45%; }
+        .col-qty { width: 10%; }
+        .col-price { width: 20%; }
+        .col-total { width: 25%; font-weight: 700 !important; color: #0f172a !important; }
+
+        /* 4. Tổng thanh toán đóng khung */
+        .inv-total-wrapper { text-align: right; margin-bottom: 30px; }
+        .inv-total-text { font-size: 18px; font-weight: bold; color: #0f172a; display: inline-block; margin-right: 15px; }
+        .inv-total-box {
+            display: inline-block;
+            font-size: 24px;
+            font-weight: 900;
+            color: #dc2626; /* Màu đỏ */
+            padding: 8px 20px;
+            border: 3px solid #dc2626; /* Đóng khung số tiền */
+            border-radius: 8px;
+            background-color: #fef2f2;
         }
 
+        /* 5. Mã QR & Lời chúc */
+        .inv-footer { display: flex; flex-direction: column; align-items: center; border-top: 2px solid #e2e8f0; padding-top: 25px; }
+        .qr-section { margin-bottom: 20px; text-align: center; }
+        .qr-box {
+            width: 160px;
+            height: 160px;
+            border: 4px solid #0f172a;
+            border-radius: 10px;
+            padding: 5px;
+            background: #fff;
+            margin: 0 auto;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .qr-box img { width: 100%; height: 100%; object-fit: contain; }
+        .qr-label { font-size: 14px; font-weight: bold; color: #475569; margin-top: 10px; text-transform: uppercase; letter-spacing: 1px; }
+
+        .thanks-section { text-align: center; width: 100%; }
+        .thanks-text { font-size: 18px; font-weight: bold; color: #0284c7; margin-bottom: 5px; }
+        .wish-text { font-size: 16px; font-style: italic; color: #475569; }
+
         /* Responsive */
-        @media (min-width: 480px) {
-            .input-group { grid-template-columns: 2fr 1fr 1fr; }
+        @media (min-width: 500px) {
+            .input-group { grid-template-columns: 2fr 1fr 1.5fr; }
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>CẤU HÌNH HÓA ĐƠN</h2>
+    <h2>CẤU HÌNH HÓA ĐƠN TÀI LIỆU</h2>
     
     <div class="config-box">
-        <!-- Phần chọn thông tin khách hàng -->
+        <label>Thông tin người nhận:</label>
         <div class="input-row">
-            <div>
-                <label for="customerTitle">Danh xưng:</label>
-                <select id="customerTitle">
-                    <option value="Thầy">Thầy</option>
-                    <option value="Cô">Cô</option>
-                </select>
-            </div>
-            <div>
-                <label for="customerName">Tên khách hàng:</label>
-                <input type="text" id="customerName" placeholder="Ví dụ: Nguyễn Văn A">
-            </div>
+            <select id="customerTitle">
+                <option value="Thầy">Thầy</option>
+                <option value="Cô">Cô</option>
+            </select>
+            <input type="text" id="customerName" placeholder="Tên khách hàng (VD: Nguyễn Văn A)">
         </div>
 
-        <!-- Phần chọn số lượng mặt hàng -->
-        <div>
-            <label for="numItems">Số loại mặt hàng cần xuất:</label>
+        <div style="margin-top: 15px;">
+            <label for="numItems">Số lượng loại tài liệu cần xuất:</label>
             <select id="numItems" class="select-items" onchange="generateInputFields()">
                 <option value="0">-- Chọn số lượng --</option>
-                <option value="1">1 loại</option>
-                <option value="2">2 loại</option>
-                <option value="3">3 loại</option>
-                <option value="4">4 loại</option>
-                <option value="5">5 loại</option>
+                <option value="1">1 loại tài liệu</option>
+                <option value="2">2 loại tài liệu</option>
+                <option value="3">3 loại tài liệu</option>
+                <option value="4">4 loại tài liệu</option>
+                <option value="5">5 loại tài liệu</option>
+                <option value="6">6 loại tài liệu</option>
             </select>
         </div>
     </div>
 
     <div id="dynamic-inputs"></div>
 
-    <button class="btn-preview" onclick="buildInvoice()">✨ Tạo Hóa Đơn</button>
+    <button class="btn-preview" onclick="buildInvoice()">✨ Khởi tạo Hóa Đơn</button>
 
-    <!-- BẢN XEM TRƯỚC HÓA ĐƠN -->
     <div id="invoice-box">
-        <div class="invoice-content-wrapper">
-            <div class="inv-header">
-                <div class="inv-brand">TURING<br>PHYSICS</div>
-                <div class="inv-date">
-                    <strong style="color: #0284c7;">HÓA ĐƠN THANH TOÁN</strong><br>
-                    <span id="invDate">Ngày: ...</span>
-                </div>
+        <div class="inv-header">
+            <img src="turing-physics.jpg" alt="Avatar" class="inv-avatar" onerror="this.src='https://via.placeholder.com/80/0284c7/ffffff?text=TP'">
+            <div class="inv-brand-wrapper">
+                <div class="inv-brand">TURING PHYSICS</div>
             </div>
-            
-            <div class="inv-customer" id="invCustomerDisplay">
-                Khách hàng: <span>...</span>
-            </div>
-            
-            <table class="inv-table">
-                <thead>
-                    <tr>
-                        <th>Tên mặt hàng / Sản phẩm</th>
-                        <th class="text-center" style="width: 50px;">SL</th>
-                        <th class="text-right">Đơn giá</th>
-                        <th class="text-right">Thành tiền</th>
-                    </tr>
-                </thead>
-                <tbody id="invTableBody">
+        </div>
+
+        <div class="inv-title-section">
+            <div class="inv-main-title">HÓA ĐƠN THANH TOÁN TÀI LIỆU VẬT LÝ THPT</div>
+            <div class="inv-datetime" id="invDateTime">00:00:00 01/01/2026</div>
+            <div class="inv-customer" id="invCustomerDisplay">Khách hàng: <span>...</span></div>
+        </div>
+
+        <table class="inv-table">
+            <thead>
+                <tr>
+                    <th class="col-name">TÊN TÀI LIỆU</th>
+                    <th class="col-qty text-center">SL</th>
+                    <th class="col-price text-right">ĐƠN GIÁ</th>
+                    <th class="col-total text-right">THÀNH TIỀN</th>
+                </tr>
+            </thead>
+            <tbody id="invTableBody">
                 </tbody>
-            </table>
-            
-            <div class="inv-total-box">
-                <div class="inv-total-text">Tổng thanh toán:</div>
-                <div class="inv-total-amount"><span id="invGrandTotal">0</span> đ</div>
+        </table>
+
+        <div class="inv-total-wrapper">
+            <div class="inv-total-text">TỔNG THANH TOÁN</div>
+            <div class="inv-total-box" id="invGrandTotal">0 đ</div>
+        </div>
+
+        <div class="inv-footer">
+            <div class="qr-section">
+                <div class="qr-box">
+                    <img src="ma-qr-cua-toi.jpg" alt="Mã QR" onerror="this.src='https://via.placeholder.com/150?text=QR+Code'">
+                </div>
+                <div class="qr-label">Quét mã thanh toán</div>
             </div>
             
-            <div class="inv-footer">
-                <div class="footer-left">
-                    <div class="thank-you">
-                        <strong>Xin chân thành cảm ơn quý thầy cô!</strong>
-                        <i>Chúc quý thầy cô sức khỏe và thuận lợi!</i>
-                    </div>
-                </div>
-                <div class="footer-right">
-                    <div class="qr-text">Quét mã thanh toán</div>
-                    <div class="qr-square-box">
-                        <img src="ma-qr-cua-toi.jpg" alt="Mã QR Thanh Toán">
-                    </div>
-                </div>
+            <div class="thanks-section">
+                <div class="thanks-text">Xin chân thành cảm ơn quý thầy cô !</div>
+                <div class="wish-text">Chúc quý thầy cô sức khỏe và thuận lợi !</div>
             </div>
         </div>
     </div>
 
-    <button id="downloadBtn" class="btn-download" onclick="downloadInvoice()">⬇️ Tải Ảnh Hóa Đơn Này Về</button>
+    <button id="downloadBtn" class="btn-download" onclick="downloadInvoice()">⬇️ Tải Ảnh Hóa Đơn Về Máy</button>
 </div>
 
 <script>
+    // Tự sinh ô nhập liệu
     function generateInputFields() {
         const num = parseInt(document.getElementById('numItems').value);
         const container = document.getElementById('dynamic-inputs');
@@ -206,11 +221,11 @@
         for(let i = 1; i <= num; i++) {
             container.innerHTML += `
                 <div class="product-row">
-                    <h4>Sản phẩm ${i}</h4>
+                    <h4>Tài liệu số ${i}</h4>
                     <div class="input-group">
-                        <input type="text" id="name_${i}" placeholder="Tên sản phẩm / tài liệu">
-                        <input type="number" id="qty_${i}" placeholder="Số lượng" min="1" oninput="calcRowSubtotal(${i})">
-                        <input type="number" id="price_${i}" placeholder="Giá 1 SP (đ)" min="0" oninput="calcRowSubtotal(${i})">
+                        <input type="text" id="name_${i}" placeholder="Tên tài liệu...">
+                        <input type="number" id="qty_${i}" placeholder="SL" min="1" oninput="calcRowSubtotal(${i})">
+                        <input type="number" id="price_${i}" placeholder="Đơn giá (đ)" min="0" oninput="calcRowSubtotal(${i})">
                     </div>
                     <div class="row-subtotal">Thành tiền: <span id="subtotal_${i}">0</span> đ</div>
                 </div>
@@ -218,6 +233,7 @@
         }
     }
 
+    // Tính tiền từng dòng
     function calcRowSubtotal(index) {
         const qty = parseFloat(document.getElementById(`qty_${index}`).value) || 0;
         const price = parseFloat(document.getElementById(`price_${index}`).value) || 0;
@@ -225,21 +241,30 @@
         document.getElementById(`subtotal_${index}`).innerText = sub.toLocaleString('vi-VN');
     }
 
+    // Hàm lấy giờ hiện tại chuẩn format
+    function getFormattedDateTime() {
+        const now = new Date();
+        const pad = (num) => num.toString().padStart(2, '0');
+        
+        const hours = pad(now.getHours());
+        const minutes = pad(now.getMinutes());
+        const seconds = pad(now.getSeconds());
+        
+        const day = pad(now.getDate());
+        const month = pad(now.getMonth() + 1);
+        const year = now.getFullYear();
+        
+        return `${hours}:${minutes}:${seconds} ${day}/${month}/${year}`;
+    }
+
+    // Nút tạo hóa đơn
     function buildInvoice() {
-        // Lấy thông tin khách hàng
         const customerTitle = document.getElementById('customerTitle').value;
         const customerName = document.getElementById('customerName').value.trim();
         const num = parseInt(document.getElementById('numItems').value);
         
-        if(!customerName) {
-            alert("Bạn chưa nhập tên thầy/cô kìa!");
-            return;
-        }
-
-        if (num === 0 || isNaN(num)) {
-            alert("Vui lòng chọn số lượng mặt hàng nhé!");
-            return;
-        }
+        if(!customerName) { alert("Vui lòng nhập tên Khách hàng (Thầy/Cô)!"); return; }
+        if (num === 0 || isNaN(num)) { alert("Vui lòng chọn số lượng tài liệu!"); return; }
 
         const tbody = document.getElementById('invTableBody');
         tbody.innerHTML = ''; 
@@ -251,10 +276,7 @@
             const qty = parseFloat(document.getElementById(`qty_${i}`).value);
             const price = parseFloat(document.getElementById(`price_${i}`).value);
             
-            if(!name || isNaN(qty) || isNaN(price)) {
-                hasError = true;
-                break;
-            }
+            if(!name || isNaN(qty) || isNaN(price)) { hasError = true; break; }
 
             const subtotal = qty * price;
             grandTotal += subtotal;
@@ -263,53 +285,51 @@
                 <tr>
                     <td>${name}</td>
                     <td class="text-center">${qty}</td>
-                    <td class="text-right">${price.toLocaleString('vi-VN')}</td>
-                    <td class="text-right" style="color: #ef4444; font-weight: bold;">${subtotal.toLocaleString('vi-VN')}</td>
+                    <td class="text-right">${price.toLocaleString('vi-VN')} đ</td>
+                    <td class="text-right col-total">${subtotal.toLocaleString('vi-VN')} đ</td>
                 </tr>
             `;
         }
 
         if(hasError) {
-            alert("Điền thiếu thông tin rồi, bạn kiểm tra lại các ô nhập liệu (tên, số lượng, giá) nhé!");
+            alert("Bạn điền thiếu thông tin tên tài liệu, số lượng hoặc đơn giá rồi!");
             return;
         }
 
-        // Đổ dữ liệu vào hóa đơn
+        // Đổ dữ liệu
+        document.getElementById('invDateTime').innerText = getFormattedDateTime();
         document.getElementById('invCustomerDisplay').innerHTML = `Khách hàng: <span>${customerTitle} ${customerName}</span>`;
-
-        const today = new Date();
-        const dateString = `Ngày ${today.getDate().toString().padStart(2, '0')}/${(today.getMonth() + 1).toString().padStart(2, '0')}/${today.getFullYear()}`;
-        document.getElementById('invDate').innerText = dateString;
-        document.getElementById('invGrandTotal').innerText = grandTotal.toLocaleString('vi-VN');
+        document.getElementById('invGrandTotal').innerText = grandTotal.toLocaleString('vi-VN') + " đ";
 
         document.getElementById('invoice-box').style.display = 'block';
         document.getElementById('downloadBtn').style.display = 'block';
         document.getElementById('invoice-box').scrollIntoView({ behavior: 'smooth' });
     }
 
+    // Tải ảnh
     function downloadInvoice() {
         const invoice = document.getElementById('invoice-box');
         const btn = document.getElementById('downloadBtn');
         const customerName = document.getElementById('customerName').value.trim().replace(/\s+/g, '-');
         
-        btn.innerText = "⏳ Đang tạo ảnh sắc nét...";
+        btn.innerText = "⏳ Đang tạo ảnh...";
         btn.disabled = true;
         
         html2canvas(invoice, {
             useCORS: true, 
             scale: 3, 
-            backgroundColor: null 
+            backgroundColor: "#ffffff" 
         }).then(canvas => {
             const link = document.createElement('a');
-            link.download = `Hoa-Don-${customerName || 'Turing-Physics'}.png`;
+            link.download = `HD-TuringPhysics-${customerName}.png`;
             link.href = canvas.toDataURL('image/png');
             link.click();
             
-            btn.innerText = "⬇️ Tải Ảnh Hóa Đơn Này Về";
+            btn.innerText = "⬇️ Tải Ảnh Hóa Đơn Về Máy";
             btn.disabled = false;
         }).catch(err => {
-            alert("Lỗi tạo ảnh. Đảm bảo bạn đã up file ma-qr-cua-toi.jpg lên GitHub nhé!");
-            btn.innerText = "⬇️ Tải Ảnh Hóa Đơn Này Về";
+            alert("Lỗi tạo ảnh. Vui lòng thử lại!");
+            btn.innerText = "⬇️ Tải Ảnh Hóa Đơn Về Máy";
             btn.disabled = false;
         });
     }
