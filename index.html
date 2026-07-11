@@ -106,10 +106,12 @@
             background: #FAFAFA; padding: 15px 20px; border-radius: 8px; 
             border-left: 3px solid #1E40AF; margin-bottom: 25px;
         }
-        .inv-customer div { margin-bottom: 4px; font-size: 15px; }
+        .inv-customer div { margin-bottom: 4px; font-size: 15px; display: flex; align-items: flex-start;}
         .inv-customer div:last-child { margin-bottom: 0; }
-        .label-blue { color: #64748B; font-weight: 500; display: inline-block; width: 85px;} 
-        .val-normal { color: #0F172A; font-weight: 600; } 
+        
+        /* Đã mở rộng chiều rộng của nhãn và chặn rớt dòng */
+        .label-blue { color: #64748B; font-weight: 500; display: inline-block; width: 110px; flex-shrink: 0; white-space: nowrap; } 
+        .val-normal { color: #0F172A; font-weight: 600; word-break: break-word; } 
 
         /* 3. Bảng dữ liệu Tối giản */
         .inv-table { width: 100%; border-collapse: collapse; font-size: 15px; margin-bottom: 20px; }
@@ -192,7 +194,7 @@
         <div id="dynamic-inputs"></div>
     </div>
 
-    <!-- Mục Ưu đãi (Mới) -->
+    <!-- Mục Ưu đãi -->
     <div class="config-section">
         <label>3. Ưu đãi / Giảm giá:</label>
         <div class="input-row two-cols">
@@ -248,7 +250,7 @@
                     <div id="invSubtotalAmount">0 đ</div>
                 </div>
                 <div class="summary-row discount" id="invDiscountRow" style="display: none;">
-                    <div>Ưu đãi giảm:</div>
+                    <div>Ưu đãi:</div>
                     <div id="invDiscountAmount">- 0 đ</div>
                 </div>
                 <div class="inv-total-wrapper">
@@ -265,13 +267,12 @@
                 <div class="bank-info">
                     <div><span>Ngân hàng:</span> <strong>MB Bank</strong></div>
                     <div><span>Tên chủ TK:</span> <strong>TRẦN GIA BẢO</strong></div>
-                    <div><span>Nội dung CK:</span> <strong>Tên + SĐT</strong></div>
                 </div>
             </div>
             
             <div class="footer-note">
                 <div class="thanks-text">Xin chân thành cảm ơn quý thầy cô!</div>
-                <div class="wish-text">Chúc thầy cô sức khỏe và công tác tốt.</div>
+                <div class="wish-text">Kính chúc thầy cô sức khỏe và công tác tốt.</div>
                 <div class="support-text">
                     Cần hỗ trợ file vui lòng liên hệ Zalo: <strong>0843.589.647</strong>
                 </div>
