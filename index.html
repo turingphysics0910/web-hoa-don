@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Hóa Đơn - TURING PHYSICS</title>
+    <title>Hóa Đơn Cute - TURING PHYSICS</title>
     
-    <!-- Sử dụng Font Inter (Chuẩn UI của Apple, Stripe) -->
+    <!-- Dùng 2 Font siêu đáng yêu: Baloo 2 (Cho tiêu đề) và Nunito (Cho nội dung) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         /* ================= CƠ BẢN & UI WEB ================= */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { 
-            font-family: 'Inter', sans-serif; 
+            font-family: 'Nunito', sans-serif; 
             padding: 20px 15px; 
-            background-color: #F6F9FC; /* Màu nền đặc trưng của Stripe */
-            color: #30313D; 
+            background-color: #FFF0F5; /* Màu nền web: Hồng Lavender phấn nhẹ */
+            color: #4A4A4A; 
             line-height: 1.6;
         }
         
@@ -27,136 +27,170 @@
             margin: 0 auto; 
             background: #ffffff; 
             padding: 30px 25px; 
-            border-radius: 12px; 
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05); 
+            border-radius: 25px; 
+            box-shadow: 0 10px 30px rgba(255, 182, 193, 0.4); 
+            border: 3px dashed #FFB6C1;
         }
-        h2 { text-align: center; color: #1A1F36; margin-bottom: 25px; font-weight: 800; font-size: 22px; letter-spacing: -0.5px;}
+        h2 { 
+            text-align: center; color: #FF69B4; margin-bottom: 25px; 
+            font-family: 'Baloo 2', cursive; font-weight: 800; font-size: 26px; 
+        }
         
         /* ================= KHU VỰC NHẬP LIỆU ================= */
         .config-section { margin-bottom: 25px; }
-        .config-section label { font-weight: 600; font-size: 14px; color: #3C4257; display: block; margin-bottom: 8px; }
+        .config-section label { font-weight: 800; font-size: 15px; color: #FF69B4; display: block; margin-bottom: 10px; font-family: 'Baloo 2', cursive; letter-spacing: 0.5px;}
         
         .input-row { display: grid; grid-template-columns: 100px 1fr; gap: 12px; margin-bottom: 12px; }
         .input-row.two-cols { grid-template-columns: 1fr 1fr; }
         
         input, select { 
-            width: 100%; padding: 12px 14px; border-radius: 6px; border: 1px solid #E3E8EE; 
-            font-size: 14px; outline: none; font-family: 'Inter', sans-serif; transition: 0.2s ease; 
-            background: #ffffff; color: #1A1F36; font-weight: 500;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+            width: 100%; padding: 14px 15px; border-radius: 15px; border: 2px solid #FFE4E1; 
+            font-size: 15px; outline: none; font-family: 'Nunito', sans-serif; transition: 0.3s ease; 
+            background: #FFFBFD; color: #4A4A4A; font-weight: 600;
         }
-        input:focus, select:focus { border-color: #635BFF; box-shadow: 0 0 0 3px rgba(99,91,255,0.15); }
+        input:focus, select:focus { background: #ffffff; border-color: #FF69B4; box-shadow: 0 0 0 4px rgba(255,105,180,0.15); }
         
-        .product-row { background: #F6F9FC; border: 1px solid #E3E8EE; padding: 15px; border-radius: 8px; margin-bottom: 12px; }
-        .product-row h4 { margin-bottom: 12px; color: #1A1F36; font-size: 14px; font-weight: 700; }
+        .product-row { background: #FFF0F5; border: 2px dashed #FFB6C1; padding: 18px; border-radius: 20px; margin-bottom: 12px; }
+        .product-row h4 { margin-bottom: 15px; color: #FF1493; font-size: 16px; font-weight: 800; font-family: 'Baloo 2', cursive;}
         
         .input-group { display: grid; grid-template-columns: 1fr 110px 130px; gap: 10px; margin-bottom: 10px; }
         @media (max-width: 500px) { .input-group { grid-template-columns: 1fr; } }
-        .row-subtotal { font-weight: 500; color: #697386; text-align: right; font-size: 14px; margin-top: 5px;}
-        .row-subtotal span { color: #1A1F36; font-weight: 700; }
+        .row-subtotal { font-weight: 700; color: #FF69B4; text-align: right; font-size: 15px; margin-top: 10px;}
+        .row-subtotal span { color: #FF1493; font-weight: 800; font-size: 16px;}
         
         button { 
-            width: 100%; padding: 14px; font-size: 15px; border-radius: 6px; border: none; 
-            cursor: pointer; font-weight: 600; transition: all 0.2s ease; margin-top: 15px; 
-            font-family: 'Inter', sans-serif; letter-spacing: 0.3px;
+            width: 100%; padding: 16px; font-size: 18px; border-radius: 15px; border: none; 
+            cursor: pointer; font-weight: 800; transition: all 0.2s ease; margin-top: 15px; 
+            font-family: 'Baloo 2', cursive; letter-spacing: 0.5px;
         }
-        .btn-preview { background-color: #635BFF; color: white; box-shadow: 0 2px 5px rgba(99,91,255,0.3); }
-        .btn-preview:hover { background-color: #4B45C6; transform: translateY(-1px); box-shadow: 0 4px 6px rgba(99,91,255,0.4); }
-        .btn-copy { background-color: #1A1F36; color: white; margin-top: 30px; display: none; box-shadow: 0 2px 5px rgba(26,31,54,0.3);}
-        .btn-copy:hover { background-color: #3C4257; }
+        .btn-preview { background: linear-gradient(135deg, #FF9A9E, #FECFEF); color: #fff; box-shadow: 0 5px 15px rgba(255, 154, 158, 0.4); text-shadow: 1px 1px 2px rgba(0,0,0,0.1);}
+        .btn-preview:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 8px 20px rgba(255, 154, 158, 0.6); }
+        .btn-copy { background: linear-gradient(135deg, #A18CD1, #FBC2EB); color: white; margin-top: 30px; display: none; box-shadow: 0 5px 15px rgba(161, 140, 209, 0.4);}
+        .btn-copy:hover { transform: translateY(-2px); }
 
-        /* ================= KHU VỰC PHÔI HÓA ĐƠN (CHUẨN STRIPE/APPLE) ================= */
+        /* ================= KHU VỰC PHÔI HÓA ĐƠN (CUTE STYLE) ================= */
         .invoice-scroll-wrapper { width: 100%; overflow-x: auto; margin-top: 40px; padding-bottom: 20px; display: none; }
 
         #invoice-box {
             width: 520px; min-width: 520px; margin: 0 auto;
             background: #ffffff; 
-            border-radius: 8px; 
-            color: #30313D; position: relative; overflow: hidden;
-            /* Bóng đổ đặc trưng của Stripe: Rất êm và có chiều sâu */
-            box-shadow: 0 4px 6px rgba(50,50,93,0.11), 0 1px 3px rgba(0,0,0,0.08);
-            border: 1px solid #E3E8EE;
-            padding: 40px;
+            border-radius: 30px; 
+            color: #4A4A4A; position: relative; overflow: hidden;
+            box-shadow: 0 15px 35px rgba(255, 182, 193, 0.3);
+            border: 4px solid #FFE4E1;
+            padding: 30px;
         }
-
-        /* 1. Header (Chia 2 cột tối giản) */
-        .inv-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px; }
         
-        .header-left { display: flex; flex-direction: column; }
-        .inv-avatar { width: 48px; height: 48px; border-radius: 8px; object-fit: cover; margin-bottom: 12px; border: 1px solid #E3E8EE; }
-        .inv-brand-name { font-size: 18px; font-weight: 800; color: #1A1F36; letter-spacing: -0.3px;}
-        .inv-brand-sub { font-size: 13px; color: #697386; margin-top: 2px;}
-
-        .header-right { text-align: right; }
-        .inv-title { font-size: 24px; font-weight: 800; color: #E3E8EE; letter-spacing: 1px; margin-bottom: 10px; text-transform: uppercase;}
-        .meta-row { font-size: 13px; margin-bottom: 4px; display: flex; justify-content: flex-end; gap: 15px;}
-        .meta-row span { color: #697386; }
-        .meta-row strong { color: #1A1F36; font-weight: 600; min-width: 80px; text-align: right;}
-
-        /* 2. Thông tin Khách hàng (Billed to) */
-        .inv-customer { margin-bottom: 35px; }
-        .c-heading { font-size: 11px; font-weight: 700; color: #8792A2; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;}
-        .c-name { font-size: 15px; font-weight: 700; color: #1A1F36; margin-bottom: 4px;}
-        .c-contact { font-size: 14px; color: #3C4257; }
-
-        /* 3. Bảng dữ liệu (Không viền dọc, tối giản) */
-        .inv-table { width: 100%; border-collapse: collapse; font-size: 14px; margin-bottom: 30px; }
-        .inv-table th { 
-            color: #697386; padding: 10px 0; 
-            font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;
-            border-bottom: 2px solid #E3E8EE;
+        /* 1. Header Đáng Yêu (Bong Bóng) */
+        .inv-header { 
+            background: linear-gradient(135deg, #FF9A9E 0%, #FECFEF 100%);
+            border-radius: 20px; padding: 20px; text-align: center;
+            box-shadow: 0 5px 15px rgba(255, 154, 158, 0.3);
+            margin-bottom: 25px; position: relative;
         }
-        .inv-table td { padding: 16px 0; border-bottom: 1px solid #F6F9FC; color: #1A1F36; vertical-align: middle; }
+        .inv-avatar { 
+            width: 75px; height: 75px; border-radius: 50%; object-fit: cover;
+            border: 4px solid #ffffff; background: #fff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            margin-top: -45px; /* Làm cho avatar nhô lên trên */
+            margin-bottom: 10px;
+        }
+        .inv-brand-name { font-size: 26px; font-weight: 800; color: #ffffff; font-family: 'Baloo 2', cursive; letter-spacing: 1px; text-shadow: 2px 2px 0px rgba(255, 105, 180, 0.5);}
+        .inv-brand-sub { font-size: 14px; color: #FFF0F5; font-weight: 600; margin-top: 2px;}
+
+        /* 2. Tiêu đề Hóa Đơn & Meta Data */
+        .inv-title { text-align: center; font-size: 22px; font-family: 'Baloo 2', cursive; font-weight: 800; color: #FF69B4; margin-bottom: 15px;}
+        
+        .inv-meta-grid {
+            display: flex; justify-content: center; gap: 15px; margin-bottom: 25px;
+        }
+        .meta-badge { 
+            background: #FFF0F5; color: #FF69B4; font-weight: 700; font-size: 13px;
+            padding: 6px 15px; border-radius: 20px; border: 1px dashed #FFB6C1;
+        }
+
+        /* 3. Thông tin Khách hàng (Thẻ mây) */
+        .inv-customer { 
+            background: #F0F8FF; border-radius: 20px; padding: 18px 20px;
+            margin-bottom: 25px; border: 2px dashed #B0E0E6;
+        }
+        .customer-row { 
+            display: flex; margin-bottom: 8px; font-size: 15px; align-items: baseline;
+        }
+        .customer-row:last-child { margin-bottom: 0; }
+        .c-label { color: #87CEEB; font-weight: 800; width: 85px; flex-shrink: 0;}
+        .c-value { color: #4A4A4A; font-weight: 700; word-break: break-word; } 
+
+        /* 4. Bảng dữ liệu (Kiểu Bubble Rows) */
+        .inv-table { 
+            width: 100%; border-collapse: separate; border-spacing: 0 8px; 
+            font-size: 14px; margin-bottom: 15px; 
+        }
+        .inv-table th { 
+            color: #FF69B4; padding: 10px 15px; font-size: 14px; font-weight: 800; 
+            background: #FFF0F5; border-radius: 12px; font-family: 'Baloo 2', cursive;
+        }
+        .inv-table td { 
+            padding: 15px; background: #FAFAFA; color: #4A4A4A; font-weight: 600;
+            border-top: 1px solid #F1F5F9; border-bottom: 1px solid #F1F5F9;
+        }
+        /* Bo tròn góc cho ô đầu và cuối của mỗi hàng dữ liệu */
+        .inv-table td:first-child { border-left: 1px solid #F1F5F9; border-top-left-radius: 15px; border-bottom-left-radius: 15px; }
+        .inv-table td:last-child { border-right: 1px solid #F1F5F9; border-top-right-radius: 15px; border-bottom-right-radius: 15px; }
+        
+        .text-center { text-align: center; }
         .text-right { text-align: right; }
         .text-left { text-align: left; } 
-        .col-total { font-weight: 600; }
+        .col-total { font-weight: 800; color: #FF1493; }
 
-        /* 4. Tổng thanh toán */
-        .summary-section { width: 100%; display: flex; flex-direction: column; align-items: flex-end; margin-bottom: 40px; gap: 8px; }
-        .summary-row { display: flex; justify-content: space-between; width: 200px; font-size: 14px; color: #697386;}
-        .summary-row.discount { color: #008A5E; } /* Màu xanh lá chuẩn Stripe */
+        /* 5. Tổng thanh toán */
+        .summary-section { width: 100%; display: flex; flex-direction: column; align-items: flex-end; margin-bottom: 30px; gap: 6px; }
+        .summary-row { display: flex; justify-content: space-between; width: 240px; font-size: 14px; color: #A9A9A9; font-weight: 700;}
+        .summary-row.discount { color: #32CD32; } 
         
         .inv-total-wrapper { 
-            display: flex; justify-content: space-between; align-items: baseline; 
-            width: 240px; padding-top: 12px; border-top: 2px solid #E3E8EE; margin-top: 5px;
+            display: flex; justify-content: space-between; align-items: center; 
+            width: 280px; padding: 15px 20px; background: #FFF0F5; border-radius: 20px; border: 2px dashed #FFB6C1;
+            margin-top: 10px;
         }
-        .inv-total-text { font-size: 14px; font-weight: 700; color: #1A1F36; text-transform: uppercase; }
-        .inv-total-box { font-size: 24px; font-weight: 800; color: #1A1F36; letter-spacing: -0.5px;}
+        .inv-total-text { font-size: 16px; font-weight: 800; color: #FF69B4; font-family: 'Baloo 2', cursive;}
+        .inv-total-box { font-size: 24px; font-weight: 900; color: #FF1493; font-family: 'Baloo 2', cursive;}
 
-        /* 5. Khu vực Thanh toán & Ngân hàng (Clean Card) */
+        /* 6. Khu vực Thanh toán & Ngân hàng (Thẻ Cute) */
         .payment-card {
-            display: flex; align-items: flex-start; justify-content: flex-start; gap: 20px;
-            background: #F6F9FC; padding: 20px; border-radius: 8px; margin-bottom: 30px; 
-            border: 1px solid #E3E8EE;
+            display: flex; align-items: center; justify-content: flex-start; gap: 20px;
+            background: #F5FFFA; padding: 15px 20px; border-radius: 20px; margin-bottom: 25px; 
+            border: 2px dashed #E0FFFF;
         }
-        .qr-box-inner { background: #fff; padding: 4px; border-radius: 6px; border: 1px solid #E3E8EE; height: 80px; width: 80px; flex-shrink: 0;}
-        .qr-img { width: 100%; height: 100%; object-fit: contain; border-radius: 4px; display: block;}
+        .qr-box-inner { background: #fff; padding: 6px; border-radius: 15px; border: 2px solid #E0FFFF; height: 95px; width: 95px; flex-shrink: 0; box-shadow: 0 4px 8px rgba(0,0,0,0.05);}
+        .qr-img { width: 100%; height: 100%; object-fit: contain; border-radius: 8px; display: block;}
         
-        .bank-info { font-size: 14px; color: #3C4257; line-height: 1.6; }
-        .bank-heading { font-size: 11px; font-weight: 700; color: #8792A2; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;}
-        .bank-row { display: flex; gap: 10px; margin-bottom: 2px;}
-        .bank-row span { color: #697386; width: 75px; font-size: 13px;}
-        .bank-row strong { color: #1A1F36; font-weight: 600; }
+        .bank-info { font-size: 15px; color: #4A4A4A; line-height: 1.6; }
+        .bank-heading { font-size: 14px; font-weight: 800; color: #20B2AA; font-family: 'Baloo 2', cursive; margin-bottom: 4px;}
+        .bank-row { display: flex; gap: 10px; margin-bottom: 2px; align-items: baseline;}
+        .bank-row span { color: #A9A9A9; width: 85px; font-size: 13px; font-weight: 700;}
+        .bank-row strong { color: #4A4A4A; font-weight: 800; font-size: 15px; }
 
-        /* 6. Footer (Ghi chú Zalo) */
-        .footer-note { text-align: left; border-top: 1px solid #E3E8EE; padding-top: 20px;}
-        .thanks-text { font-family: 'Dancing Script', cursive; font-size: 24px; font-weight: 700; color: #1A1F36; margin-bottom: 8px; }
-        .wish-text { font-size: 13px; color: #697386; margin-bottom: 8px;}
-        .support-text { font-size: 13px; color: #697386; }
-        .support-text strong { color: #635BFF; font-weight: 600;} /* Màu blurple của Stripe */
+        /* 7. Footer Cảm ơn */
+        .footer-note { text-align: center; border-top: 2px dashed #FFE4E1; padding-top: 20px;}
+        .thanks-text { font-size: 20px; font-weight: 800; color: #FF69B4; margin-bottom: 4px; font-family: 'Baloo 2', cursive; }
+        .wish-text { font-size: 14px; color: #A9A9A9; margin-bottom: 15px; font-weight: 600;}
+        .support-text { font-size: 14px; color: #87CEEB; font-weight: 700; background: #F0F8FF; display: inline-block; padding: 8px 20px; border-radius: 20px;}
+        .support-text strong { color: #1E90FF; font-weight: 800;}
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>CẤU HÌNH HÓA ĐƠN</h2>
+    <h2>🎀 CẤU HÌNH HÓA ĐƠN 🎀</h2>
     
     <div class="config-section">
-        <label>1. Thông tin người nhận:</label>
+        <label>💖 1. Thông tin người nhận:</label>
         <div class="input-row">
             <select id="customerTitle">
                 <option value="Thầy">Thầy</option>
                 <option value="Cô">Cô</option>
+                <option value="Bạn">Bạn</option>
             </select>
             <input type="text" id="customerName" placeholder="Tên khách hàng (* Bắt buộc)">
         </div>
@@ -167,7 +201,7 @@
     </div>
 
     <div class="config-section">
-        <label>2. Cấu hình tài liệu:</label>
+        <label>📚 2. Cấu hình tài liệu:</label>
         <select id="numItems" onchange="generateInputFields()" style="margin-bottom: 15px;">
             <option value="0">-- Chọn số lượng loại tài liệu --</option>
             <option value="1">1 loại tài liệu</option>
@@ -183,98 +217,95 @@
     </div>
 
     <div class="config-section">
-        <label>3. Ưu đãi / Giảm giá (Tổng bill):</label>
+        <label>✨ 3. Ưu đãi / Giảm giá (Tổng bill):</label>
         <div class="input-row two-cols">
             <select id="hasDiscount" onchange="toggleDiscountInput()">
                 <option value="no">Không có ưu đãi</option>
-                <option value="yes">Có ưu đãi</option>
+                <option value="yes">Có ưu đãi nha</option>
             </select>
             <input type="number" id="discountAmount" placeholder="Số tiền giảm (đ)" style="display: none;" min="0">
         </div>
     </div>
 
-    <button class="btn-preview" onclick="buildInvoice()">✨ Tạo Hóa Đơn</button>
+    <button class="btn-preview" onclick="buildInvoice()">✨ Tạo Hóa Đơn Xinh Xắn ✨</button>
 
     <!-- ================= BẢN XEM TRƯỚC HÓA ĐƠN ================= -->
     <div class="invoice-scroll-wrapper" id="invoiceScroll">
         <div id="invoice-box">
             
-            <!-- 1. Header chia 2 cột -->
+            <!-- 1. Header Kẹo Ngọt -->
             <div class="inv-header">
-                <div class="header-left">
-                    <img src="turing-physics.jpg" alt="Logo" class="inv-avatar" onerror="this.src='https://via.placeholder.com/48?text=TP'">
-                    <div class="inv-brand-name">TURING PHYSICS</div>
-                    <div class="inv-brand-sub">Tài liệu Vật Lý THPT</div>
-                </div>
-                <div class="header-right">
-                    <div class="inv-title">INVOICE</div>
-                    <div class="meta-row"><span>Mã số</span> <strong id="invIdDisplay">#TP-XXXX</strong></div>
-                    <div class="meta-row"><span>Ngày lập</span> <strong id="invDateTime">01/01/2026</strong></div>
-                </div>
+                <img src="turing-physics.jpg" alt="Logo" class="inv-avatar" onerror="this.src='https://via.placeholder.com/75?text=TP'">
+                <div class="inv-brand-name">TURING PHYSICS</div>
+                <div class="inv-brand-sub">Tài liệu Vật Lý THPT siêu xịn</div>
             </div>
 
-            <!-- 2. Khách hàng -->
-            <div class="inv-customer">
-                <div class="c-heading">HÓA ĐƠN GỬI TỚI</div>
-                <div id="outCustomerDisplay">
-                    <!-- Dữ liệu JS -->
-                </div>
+            <!-- 2. Tiêu đề & Badges -->
+            <div class="inv-title">🎀 HÓA ĐƠN MUA SẮM 🎀</div>
+            <div class="inv-meta-grid">
+                <div class="meta-badge" id="invIdDisplay">🆔 #TP-XXXX</div>
+                <div class="meta-badge" id="invDateTime">📅 01/01/2026</div>
             </div>
 
-            <!-- 3. Bảng dữ liệu -->
+            <!-- 3. Khách hàng -->
+            <div class="inv-customer" id="outCustomerDisplay">
+                <!-- Dữ liệu JS -->
+            </div>
+
+            <!-- 4. Bảng dữ liệu -->
             <table class="inv-table">
                 <thead>
                     <tr>
-                        <th class="text-left">Mô tả tài liệu</th>
-                        <th class="text-right">Đơn giá</th>
-                        <th class="text-right">Số tiền</th>
+                        <th class="text-left">🌸 Tên tài liệu</th>
+                        <th class="text-right">💰 Đơn giá</th>
+                        <th class="text-right">✨ Thành tiền</th>
                     </tr>
                 </thead>
                 <tbody id="invTableBody">
                 </tbody>
             </table>
 
-            <!-- 4. Tổng kết -->
+            <!-- 5. Tổng kết -->
             <div class="summary-section">
                 <div class="summary-row" id="invSubtotalRow" style="display: none;">
-                    <div>Tạm tính</div>
+                    <div>Tạm tính:</div>
                     <div id="invSubtotalAmount">0 ₫</div>
                 </div>
                 <div class="summary-row discount" id="invDiscountRow" style="display: none;">
-                    <div>Ưu đãi</div>
+                    <div>Giảm giá:</div>
                     <div id="invDiscountAmount">- 0 ₫</div>
                 </div>
                 <div class="inv-total-wrapper">
-                    <div class="inv-total-text">TỔNG CỘNG</div>
+                    <div class="inv-total-text">TỔNG CỘNG:</div>
                     <div class="inv-total-box" id="invGrandTotal">0 ₫</div>
                 </div>
             </div>
 
-            <!-- 5. Thanh toán & Ngân hàng -->
+            <!-- 6. Thanh toán & Ngân hàng -->
             <div class="payment-card">
                 <div class="qr-box-inner">
-                    <img src="ma-qr-cua-toi.jpg" alt="Mã QR" class="qr-img" onerror="this.src='https://via.placeholder.com/80?text=QR'">
+                    <img src="ma-qr-cua-toi.jpg" alt="Mã QR" class="qr-img" onerror="this.src='https://via.placeholder.com/95?text=QR'">
                 </div>
                 <div class="bank-info">
-                    <div class="bank-heading">Thông tin thanh toán</div>
-                    <div class="bank-row"><span>Ngân hàng</span> <strong>MB Bank</strong></div>
-                    <div class="bank-row"><span>Chủ tài khoản</span> <strong>TRẦN GIA BẢO</strong></div>
+                    <div class="bank-heading">💳 Chuyển khoản cho mình nha</div>
+                    <div class="bank-row"><span>Ngân hàng:</span> <strong>MB Bank</strong></div>
+                    <div class="bank-row"><span>Chủ TK:</span> <strong>TRẦN GIA BẢO</strong></div>
                 </div>
             </div>
             
-            <!-- 6. Footer Cảm ơn -->
+            <!-- 7. Footer Cảm ơn -->
             <div class="footer-note">
-                <div class="thanks-text">Xin chân thành cảm ơn!</div>
-                <div class="wish-text">Kính chúc quý thầy cô dồi dào sức khỏe và công tác tốt.</div>
+                <div class="thanks-text">Cảm ơn bạn nhiều nha! 🥰</div>
+                <div class="wish-text">Chúc thầy/cô một ngày thật nhiều niềm vui và may mắn 🌸</div>
                 <div class="support-text">
-                    Hỗ trợ khách hàng qua Zalo: <strong>0843.589.647</strong>
+                    Hỗ trợ Zalo: <strong>0843.589.647</strong>
                 </div>
             </div>
             
         </div>
     </div>
 
-    <button id="copyBtn" class="btn-copy" onclick="copyInvoiceImage()">📋 Lưu & Copy Ảnh Hóa Đơn</button>
+    <button id="copyBtn" class="btn-copy" onclick="copyInvoiceImage()">📸 Lưu & Copy Ảnh Hóa Đơn</button>
 </div>
 
 <script>
@@ -286,12 +317,12 @@
         for(let i = 1; i <= num; i++) {
             container.innerHTML += `
                 <div class="product-row">
-                    <h4>Tài liệu số ${i}</h4>
+                    <h4>📝 Tài liệu số ${i}</h4>
                     <div class="input-group">
                         <input type="text" id="name_${i}" placeholder="Tên tài liệu...">
                         <select id="type_${i}" onchange="calcRowSubtotal(${i})">
                             <option value="tinh">Tính tiền</option>
-                            <option value="tang">Tặng</option>
+                            <option value="tang">🎁 Tặng</option>
                         </select>
                         <input type="number" id="price_${i}" placeholder="Đơn giá (₫)" min="0" oninput="calcRowSubtotal(${i})">
                     </div>
@@ -318,13 +349,13 @@
     function getFormattedDateTime() {
         const now = new Date();
         const pad = (num) => num.toString().padStart(2, '0');
-        return `${pad(now.getDate())}/${pad(now.getMonth() + 1)}/${now.getFullYear()} ${pad(now.getHours())}:${pad(now.getMinutes())}`;
+        return `📅 ${pad(now.getDate())}/${pad(now.getMonth() + 1)}/${now.getFullYear()} - ${pad(now.getHours())}:${pad(now.getMinutes())}`;
     }
 
     function generateInvoiceID() {
         const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        let result = '#';
-        for (let i = 0; i < 7; i++) { result += chars.charAt(Math.floor(Math.random() * chars.length)); }
+        let result = '🆔 #TP-';
+        for (let i = 0; i < 5; i++) { result += chars.charAt(Math.floor(Math.random() * chars.length)); }
         return result;
     }
 
@@ -335,8 +366,8 @@
         const email = document.getElementById('customerEmail').value.trim();
         const num = parseInt(document.getElementById('numItems').value);
         
-        if(!customerName) { alert("Vui lòng nhập tên Khách hàng!"); return; }
-        if (num === 0 || isNaN(num)) { alert("Vui lòng chọn số lượng tài liệu!"); return; }
+        if(!customerName) { alert("Vui lòng nhập tên Khách hàng nha!"); return; }
+        if (num === 0 || isNaN(num)) { alert("Bạn chọn số lượng tài liệu giúp mình nhé!"); return; }
 
         const tbody = document.getElementById('invTableBody');
         tbody.innerHTML = ''; 
@@ -353,27 +384,26 @@
             let displayPriceHtml = "";
             let subtotal = price;
             
-            // Xử lý Hàng tặng tinh tế
             if (type === 'tang') {
-                name = `<strong style="color:#008A5E; font-size:12px; margin-right:4px;">[TẶNG]</strong> ${name}`;
-                displayPriceHtml = `<del style="color:#A3ACBA; font-size: 12px; font-weight: 400;">${price.toLocaleString('vi-VN')}</del><br><span style="color:#008A5E; font-weight:600;">0</span>`;
+                name = `<strong style="color:#FF1493; font-size:13px; margin-right:5px; background: #FFE4E1; padding: 3px 8px; border-radius: 10px;">🎁 TẶNG</strong> ${name}`;
+                displayPriceHtml = `<del style="color:#A9A9A9; font-size: 12px; font-weight: 600;">${price.toLocaleString('vi-VN')}</del><br><span style="color:#32CD32; font-weight:800;">0</span>`;
                 subtotal = 0; 
             } else {
-                displayPriceHtml = `<span style="font-weight:500;">${price.toLocaleString('vi-VN')}</span>`;
+                displayPriceHtml = `<span style="font-weight:700;">${price.toLocaleString('vi-VN')}</span>`;
             }
 
             itemTotal += subtotal;
 
             tbody.innerHTML += `
                 <tr>
-                    <td class="text-left" style="font-weight:500;">${name}</td>
+                    <td class="text-left" style="font-weight:700; line-height: 1.6;">${name}</td>
                     <td class="text-right">${displayPriceHtml}</td>
-                    <td class="text-right col-total">${subtotal.toLocaleString('vi-VN')} ₫</td>
+                    <td class="text-right col-total" style="white-space: nowrap;">${subtotal.toLocaleString('vi-VN')} ₫</td>
                 </tr>
             `;
         }
 
-        if(hasError) { alert("Bạn điền thiếu thông tin tên tài liệu hoặc đơn giá!"); return; }
+        if(hasError) { alert("Bạn điền thiếu thông tin tên tài liệu hoặc đơn giá rồi kìa!"); return; }
 
         let discount = 0;
         if (document.getElementById('hasDiscount').value === 'yes') {
@@ -395,11 +425,9 @@
 
         document.getElementById('invGrandTotal').innerText = grandTotal.toLocaleString('vi-VN') + " ₫";
 
-        // Layout khách hàng tối giản
-        let customerHtml = `<div class="c-name">${customerTitle} ${customerName}</div><div class="c-contact">`;
-        if(phone) customerHtml += `${phone}<br>`;
-        if(email) customerHtml += `${email}`;
-        customerHtml += `</div>`;
+        let customerHtml = `<div class="customer-row"><span class="c-label">👤 Khách hàng:</span> <span class="c-value">${customerTitle} ${customerName}</span></div>`;
+        if(phone) customerHtml += `<div class="customer-row"><span class="c-label">📱 Điện thoại:</span> <span class="c-value">${phone}</span></div>`;
+        if(email) customerHtml += `<div class="customer-row"><span class="c-label">💌 Email:</span> <span class="c-value">${email}</span></div>`;
         
         document.getElementById('outCustomerDisplay').innerHTML = customerHtml;
         document.getElementById('invIdDisplay').innerText = generateInvoiceID();
@@ -415,7 +443,7 @@
         const invoice = document.getElementById('invoice-box');
         const btn = document.getElementById('copyBtn');
         
-        btn.innerText = "⏳ Đang xử lý ảnh...";
+        btn.innerText = "⏳ Chờ một xíu nha...";
         btn.disabled = true;
         
         html2canvas(invoice, {
@@ -429,26 +457,26 @@
                 try {
                     const item = new ClipboardItem({ "image/png": blob });
                     navigator.clipboard.write([item]).then(function() {
-                        btn.innerText = "✅ Đã Copy Thành Công!";
-                        btn.style.backgroundColor = "#008A5E"; 
+                        btn.innerText = "✨ Đã Copy Thành Công! ✨";
+                        btn.style.background = "linear-gradient(135deg, #84fab0, #8fd3f4)"; 
                         btn.disabled = false;
-                        setTimeout(() => { alert("Ảnh hóa đơn đã được lưu vào bộ nhớ tạm. Paste vào Zalo ngay!"); }, 100);
+                        setTimeout(() => { alert("Ảnh hóa đơn đã được lưu vào bộ nhớ tạm. Paste vào Zalo ngay thôi! 🥰"); }, 100);
                     }).catch(function(err) {
-                        alert("Vui lòng nhấn giữ vào hóa đơn bên trên và chọn 'Sao chép hình ảnh'!");
-                        btn.innerText = "📋 Lưu & Copy Ảnh Hóa Đơn";
-                        btn.style.backgroundColor = "#1A1F36";
+                        alert("Vui lòng nhấn giữ vào hóa đơn bên trên và chọn 'Sao chép hình ảnh' nha!");
+                        btn.innerText = "📸 Lưu & Copy Ảnh Hóa Đơn";
+                        btn.style.background = "linear-gradient(135deg, #A18CD1, #FBC2EB)";
                         btn.disabled = false;
                     });
                 } catch (error) {
-                    alert("Trình duyệt không hỗ trợ, vui lòng nhấn giữ để copy ảnh.");
-                    btn.innerText = "📋 Lưu & Copy Ảnh Hóa Đơn";
-                    btn.style.backgroundColor = "#1A1F36";
+                    alert("Trình duyệt không hỗ trợ, vui lòng nhấn giữ để copy ảnh giúp mình nhé.");
+                    btn.innerText = "📸 Lưu & Copy Ảnh Hóa Đơn";
+                    btn.style.background = "linear-gradient(135deg, #A18CD1, #FBC2EB)";
                     btn.disabled = false;
                 }
             }, "image/png");
         }).catch(err => {
-            alert("Lỗi! Đảm bảo up file logo/QR lên mạng.");
-            btn.innerText = "📋 Lưu & Copy Ảnh Hóa Đơn";
+            alert("Lỗi mất rồi! Đảm bảo up file logo/QR lên mạng chưa nhé.");
+            btn.innerText = "📸 Lưu & Copy Ảnh Hóa Đơn";
             btn.disabled = false;
         });
     }
