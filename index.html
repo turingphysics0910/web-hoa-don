@@ -12,12 +12,12 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
-        /* ================= CƠ BẢN ================= */
+        /* ================= CƠ BẢN & UI WEB ================= */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { 
             font-family: 'Lora', serif; 
             padding: 20px 15px; 
-            background-color: #FDF8F3; 
+            background-color: #F8FAFC; /* Nền xám xanh cực nhạt cho web */
             color: #334155; 
             line-height: 1.5;
         }
@@ -27,142 +27,152 @@
             margin: 0 auto; 
             background: #ffffff; 
             padding: 30px 25px; 
-            border-radius: 12px; 
-            box-shadow: 0 4px 20px rgba(0,0,0,0.04); 
+            border-radius: 16px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05); 
         }
-        h2 { text-align: center; color: #1E40AF; margin-bottom: 25px; font-weight: 700; font-size: 22px; }
+        h2 { text-align: center; color: #0F172A; margin-bottom: 25px; font-weight: 700; font-size: 24px; letter-spacing: 0.5px;}
         
         /* ================= KHU VỰC NHẬP LIỆU ================= */
         .config-section { margin-bottom: 25px; }
-        .config-section label { font-weight: 600; font-size: 15px; color: #1E293B; display: block; margin-bottom: 8px; }
+        .config-section label { font-weight: 600; font-size: 15px; color: #1E293B; display: block; margin-bottom: 10px; }
         
         .input-row { display: grid; grid-template-columns: 100px 1fr; gap: 12px; margin-bottom: 12px; }
         .input-row.two-cols { grid-template-columns: 1fr 1fr; }
         
         input, select { 
-            width: 100%; padding: 12px 15px; border-radius: 8px; border: 1px solid #E2E8F0; 
-            font-size: 15px; outline: none; font-family: 'Lora', serif; transition: 0.2s ease; 
-            background: #FAFAFA; color: #0F172A;
+            width: 100%; padding: 14px 15px; border-radius: 10px; border: 1px solid #E2E8F0; 
+            font-size: 15px; outline: none; font-family: 'Lora', serif; transition: 0.3s ease; 
+            background: #F8FAFC; color: #0F172A;
         }
-        input:focus, select:focus { background: #ffffff; border-color: #3B82F6; box-shadow: 0 0 0 3px rgba(59,130,246,0.1); }
+        input:focus, select:focus { background: #ffffff; border-color: #0284C7; box-shadow: 0 0 0 3px rgba(2,132,199,0.15); }
         
-        .product-row { background: #ffffff; border: 1px solid #E2E8F0; padding: 15px; border-radius: 8px; margin-bottom: 12px; }
-        .product-row h4 { margin-bottom: 12px; color: #1E40AF; font-size: 15px; font-weight: 600; }
+        .product-row { background: #ffffff; border: 1px solid #E2E8F0; padding: 18px; border-radius: 12px; margin-bottom: 12px; }
+        .product-row h4 { margin-bottom: 15px; color: #0284C7; font-size: 15px; font-weight: 700; }
         
-        .input-group { display: grid; grid-template-columns: 1fr 110px 120px; gap: 10px; margin-bottom: 10px; }
+        .input-group { display: grid; grid-template-columns: 1fr 110px 130px; gap: 10px; margin-bottom: 10px; }
         @media (max-width: 500px) { .input-group { grid-template-columns: 1fr; } }
-        .row-subtotal { font-weight: 600; color: #475569; text-align: right; font-size: 15px; }
+        .row-subtotal { font-weight: 600; color: #64748B; text-align: right; font-size: 15px; margin-top: 10px;}
+        .row-subtotal span { color: #DC2626; font-weight: 700; }
         
         button { 
-            width: 100%; padding: 14px; font-size: 16px; border-radius: 8px; border: none; 
-            cursor: pointer; font-weight: 600; transition: all 0.2s ease; margin-top: 10px; font-family: 'Lora', serif; 
+            width: 100%; padding: 16px; font-size: 16px; border-radius: 10px; border: none; 
+            cursor: pointer; font-weight: 700; transition: all 0.2s ease; margin-top: 15px; font-family: 'Lora', serif; 
+            letter-spacing: 0.5px;
         }
-        .btn-preview { background-color: #1E40AF; color: white; }
-        .btn-preview:hover { background-color: #1E3A8A; transform: translateY(-1px); }
-        .btn-copy { background-color: #0F172A; color: white; margin-top: 25px; display: none; }
+        .btn-preview { background-color: #0284C7; color: white; box-shadow: 0 4px 12px rgba(2,132,199,0.3); }
+        .btn-preview:hover { background-color: #0369A1; transform: translateY(-2px); }
+        .btn-copy { background-color: #0F172A; color: white; margin-top: 30px; display: none; box-shadow: 0 4px 12px rgba(15,23,42,0.3);}
         .btn-copy:hover { background-color: #1E293B; }
 
-        /* ================= KHU VỰC PHÔI HÓA ĐƠN ================= */
+        /* ================= KHU VỰC PHÔI HÓA ĐƠN (CAO CẤP - TỐI GIẢN) ================= */
         .invoice-scroll-wrapper { width: 100%; overflow-x: auto; margin-top: 40px; padding-bottom: 20px; display: none; }
 
         #invoice-box {
             width: 520px; min-width: 520px; margin: 0 auto;
-            background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
-            padding: 40px 35px; border: 2px solid #7dd3fc; border-radius: 12px; 
+            background: #ffffff; /* Nền trắng tinh khôi */
+            padding: 0 0 40px 0; /* Xóa padding top để làm thanh accent */
+            border-radius: 16px; 
             color: #0F172A; position: relative; overflow: hidden;
-            box-shadow: inset 0 0 15px rgba(255,255,255,0.6);
+            /* Đổ bóng sâu, mượt mang lại cảm giác tờ giấy thật */
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.03);
+            border: 1px solid #F1F5F9;
         }
         
-        /* HÌNH MỜ (WATERMARK) CHỐNG COPY */
+        /* Thanh Accent phía trên cùng (Tạo điểm nhấn thương hiệu) */
+        .inv-top-bar {
+            width: 100%; height: 8px;
+            background: linear-gradient(90deg, #0284C7, #38BDF8);
+        }
+
+        /* WATERMARK (Tinh tế, mờ ảo) */
         .watermark {
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            width: 350px; height: 350px;
-            opacity: 0.04; /* Mờ 4% để không làm rối chữ */
-            z-index: 0; pointer-events: none;
-            border-radius: 50%; object-fit: cover;
+            position: absolute; top: 55%; left: 50%; transform: translate(-50%, -50%);
+            width: 380px; height: 380px; opacity: 0.03; /* Cực mờ */
+            z-index: 0; pointer-events: none; border-radius: 50%; object-fit: cover;
         }
-
-        /* Nâng Z-index cho các nội dung để không bị chìm dưới hình mờ */
-        .content-layer { position: relative; z-index: 2; }
+        .content-layer { position: relative; z-index: 2; padding: 35px 40px 0 40px; }
         
-        /* 1. Header Minimalist */
-        .inv-header { display: flex; align-items: center; gap: 15px; margin-bottom: 30px; border-bottom: 1px dashed #7dd3fc; padding-bottom: 20px;}
+        /* 1. Header (Trang trọng, Center) */
+        .inv-header { display: flex; flex-direction: column; align-items: center; margin-bottom: 30px; }
         .inv-avatar { 
-            width: 65px; height: 65px; border-radius: 50%; object-fit: cover;
-            border: 2px solid #ffffff; box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            width: 80px; height: 80px; border-radius: 50%; object-fit: cover;
+            border: 2px solid #F1F5F9; margin-bottom: 12px;
         }
-        .inv-brand-info { display: flex; flex-direction: column; }
-        .inv-brand-name { font-size: 24px; font-weight: 700; color: #0284c7; letter-spacing: 0.5px;}
-        .inv-brand-sub { font-size: 13.5px; color: #0369a1; }
+        .inv-brand-name { font-size: 26px; font-weight: 800; color: #0F172A; letter-spacing: 2px;}
+        .inv-brand-sub { font-size: 14px; color: #64748B; font-style: italic; margin-top: 2px;}
 
-        /* 2. Title & Customer Info */
-        .inv-title { text-align: center; font-size: 19px; font-weight: 700; color: #0284c7; margin-bottom: 5px; }
-        /* Thêm class cho Mã Hóa Đơn */
-        .inv-id { text-align: center; font-size: 15px; color: #1e293b; font-weight: 700; margin-bottom: 2px; }
-        .inv-datetime { text-align: center; font-size: 14px; color: #0369a1; font-weight: 600; margin-bottom: 25px; }
+        /* 2. Tiêu đề Hóa Đơn & Meta Data (Chia cột) */
+        .inv-title { text-align: center; font-size: 22px; font-weight: 700; color: #0284C7; margin-bottom: 20px; letter-spacing: 1px; text-transform: uppercase;}
         
-        .inv-customer { 
-            background: rgba(255,255,255,0.85); padding: 15px 20px; border-radius: 8px; 
-            border-left: 4px solid #0284c7; margin-bottom: 25px; box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+        .inv-meta-grid {
+            display: grid; grid-template-columns: 1fr 1fr; 
+            background: #F8FAFC; padding: 12px 20px; border-radius: 8px;
+            margin-bottom: 25px; border: 1px solid #E2E8F0;
         }
-        .inv-customer div { margin-bottom: 4px; font-size: 15px; display: flex; align-items: flex-start;}
-        .inv-customer div:last-child { margin-bottom: 0; }
+        .meta-item { display: flex; flex-direction: column; }
+        .meta-label { font-size: 11px; color: #64748B; text-transform: uppercase; font-weight: 700; letter-spacing: 1px; margin-bottom: 3px;}
+        .meta-value { font-size: 14px; color: #0F172A; font-weight: 600; }
+        .meta-right { text-align: right; border-left: 1px solid #E2E8F0; padding-left: 20px;}
         
-        .label-blue { color: #0369a1; font-weight: 600; display: inline-block; width: 110px; flex-shrink: 0; white-space: nowrap; } 
-        .val-normal { color: #0F172A; font-weight: 600; word-break: break-word; } 
+        /* 3. Thông tin Khách hàng (Sạch sẽ, line phân cách) */
+        .inv-customer { margin-bottom: 30px; }
+        .customer-row { 
+            display: flex; padding: 8px 0; border-bottom: 1px dashed #E2E8F0; 
+            font-size: 15px; align-items: baseline;
+        }
+        .customer-row:last-child { border-bottom: none; }
+        .c-label { color: #64748B; font-weight: 600; width: 100px; flex-shrink: 0; }
+        .c-value { color: #0F172A; font-weight: 700; word-break: break-word; } 
 
-        /* 3. Bảng dữ liệu */
-        .table-wrapper {
-            background: #ffffff; border-radius: 12px; overflow: hidden;    
-            border: 2px solid #7dd3fc; margin-bottom: 20px; box-shadow: 0 3px 8px rgba(0,0,0,0.03);
-        }
-        .inv-table { width: 100%; border-collapse: collapse; font-size: 15px; }
+        /* 4. Bảng dữ liệu (Không viền dọc, thanh thoát) */
+        .inv-table { width: 100%; border-collapse: collapse; font-size: 14px; margin-bottom: 25px; }
         .inv-table th { 
-            color: #0284c7; padding: 10px 5px; font-size: 14px; 
-            font-weight: 700; text-transform: uppercase; text-align: center; border-bottom: 2px solid #7dd3fc;
+            background-color: #F8FAFC; color: #475569; padding: 12px 8px; 
+            font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+            border-top: 1px solid #E2E8F0; border-bottom: 2px solid #E2E8F0;
         }
-        .inv-table td { padding: 15px 5px; border-bottom: 1px dashed #bae6fd; color: #1E293B; vertical-align: middle; }
+        .inv-table td { padding: 15px 8px; border-bottom: 1px solid #F1F5F9; color: #1E293B; vertical-align: middle; }
         .text-center { text-align: center; }
         .text-right { text-align: right; }
-        .text-left { text-align: left; padding-left: 10px; } 
+        .text-left { text-align: left; padding-left: 5px; } 
 
-        /* 4. Tổng thanh toán & Ưu đãi */
-        .summary-section { width: 100%; display: flex; flex-direction: column; align-items: flex-end; margin-bottom: 30px; gap: 8px; }
-        .summary-row { display: flex; justify-content: space-between; width: 250px; font-size: 15px; color: #0369a1; font-weight: 600;}
-        .summary-row.discount { color: #16A34A; font-weight: 600; }
+        /* 5. Tổng thanh toán */
+        .summary-section { width: 100%; display: flex; flex-direction: column; align-items: flex-end; margin-bottom: 35px; gap: 8px; }
+        .summary-row { display: flex; justify-content: space-between; width: 220px; font-size: 14px; color: #64748B; font-weight: 500;}
+        .summary-row.discount { color: #059669; }
         
-        .inv-total-wrapper { display: flex; justify-content: space-between; align-items: center; width: 250px; padding-top: 10px; border-top: 1px dashed #7dd3fc; margin-top: 5px;}
-        .inv-total-text { font-size: 16px; font-weight: 700; color: #0284c7; }
-        .inv-total-box { font-size: 20px; font-weight: 700; color: #E63946; }
-
-        /* 5. Footer (Thanh toán & Lời chúc) */
-        .payment-section {
-            display: flex; align-items: center; justify-content: flex-start; gap: 20px;
-            background: rgba(255,255,255,0.7); padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #bae6fd;
+        .inv-total-wrapper { 
+            display: flex; justify-content: space-between; align-items: center; 
+            width: 260px; padding-top: 15px; border-top: 2px solid #0F172A; margin-top: 5px;
         }
-        .qr-box-inner { text-align: center; }
-        .qr-img { width: 100px; height: 100px; object-fit: contain; border-radius: 8px; background: white; padding: 4px; border: 1px solid #7dd3fc;}
-        
-        .bank-info { font-size: 15px; color: #1E293B; line-height: 1.6; }
-        .bank-info span { color: #0369a1; display: inline-block; width: 90px; font-weight: 600; }
-        .bank-info strong { color: #0284c7; font-weight: 700; font-size: 16px; }
+        .inv-total-text { font-size: 15px; font-weight: 800; color: #0F172A; text-transform: uppercase; }
+        .inv-total-box { font-size: 22px; font-weight: 800; color: #DC2626; }
 
-        .footer-note { text-align: center; }
+        /* 6. Khu vực Thanh toán & Ngân hàng (Dạng Card mềm mại) */
+        .payment-card {
+            display: flex; align-items: center; justify-content: flex-start; gap: 20px;
+            background: #F0F9FF; padding: 20px; border-radius: 12px; margin-bottom: 30px; 
+            border: 1px solid #BAE6FD;
+        }
+        .qr-box-inner { text-align: center; background: #fff; padding: 6px; border-radius: 10px; border: 1px solid #E0F2FE; box-shadow: 0 2px 4px rgba(0,0,0,0.02);}
+        .qr-img { width: 100px; height: 100px; object-fit: contain; border-radius: 6px; display: block;}
         
-        /* Font chữ ký viết tay xịn sò */
+        .bank-info { font-size: 15px; color: #0F172A; line-height: 1.7; }
+        .bank-info span { color: #64748B; display: inline-block; width: 90px; font-weight: 500; font-size: 14px;}
+        .bank-info strong { color: #0284C7; font-weight: 800; font-size: 16px; }
+
+        /* 7. Footer (Chữ ký & Lời chúc) */
+        .footer-note { text-align: center; }
         .thanks-text { 
             font-family: 'Dancing Script', cursive; 
-            font-size: 28px; 
+            font-size: 32px; 
             font-weight: 700; 
-            color: #0284c7; 
-            margin-bottom: 2px;
+            color: #0F172A; 
+            margin-bottom: 5px;
         }
-        
-        .wish-text { font-size: 15px; color: #0369a1; font-style: italic; margin-bottom: 15px; font-weight: 500;}
-        .support-text { font-size: 14px; color: #334155; border-top: 1px dashed #7dd3fc; padding-top: 15px; font-weight: 500;}
-        .support-text strong { color: #0068ff; font-weight: 700;}
+        .wish-text { font-size: 14px; color: #64748B; margin-bottom: 20px; font-weight: 500;}
+        .support-text { font-size: 13px; color: #94A3B8; border-top: 1px solid #F1F5F9; padding-top: 15px; font-weight: 400;}
+        .support-text strong { color: #0284C7; font-weight: 700;}
     </style>
 </head>
 <body>
@@ -217,35 +227,45 @@
     <!-- ================= BẢN XEM TRƯỚC HÓA ĐƠN ================= -->
     <div class="invoice-scroll-wrapper" id="invoiceScroll">
         <div id="invoice-box">
-            <!-- HÌNH CHÌM WATERMARK -->
+            <div class="inv-top-bar"></div>
+            
             <img src="turing-physics.jpg" alt="Watermark" class="watermark" onerror="this.style.display='none'">
             
             <div class="content-layer">
-                <!-- 1. Header Minimalist -->
+                <!-- 1. Header Trung tâm -->
                 <div class="inv-header">
-                    <img src="turing-physics.jpg" alt="Logo" class="inv-avatar" onerror="this.src='https://via.placeholder.com/60?text=Logo'">
-                    <div class="inv-brand-info">
-                        <div class="inv-brand-name">TURING PHYSICS</div>
-                        <div class="inv-brand-sub">Chuyên tài liệu Vật Lý THPT chất lượng cao</div>
+                    <img src="turing-physics.jpg" alt="Logo" class="inv-avatar" onerror="this.src='https://via.placeholder.com/80?text=Logo'">
+                    <div class="inv-brand-name">TURING PHYSICS</div>
+                    <div class="inv-brand-sub">Chuyên tài liệu Vật Lý THPT chất lượng cao</div>
+                </div>
+
+                <div class="inv-title">HÓA ĐƠN THANH TOÁN</div>
+                
+                <!-- 2. Meta Data (Grid) -->
+                <div class="inv-meta-grid">
+                    <div class="meta-item">
+                        <span class="meta-label">Mã Hóa Đơn</span>
+                        <span class="meta-value" id="invIdDisplay">TP-XXXX</span>
+                    </div>
+                    <div class="meta-item meta-right">
+                        <span class="meta-label">Ngày tạo</span>
+                        <span class="meta-value" id="invDateTime">01/01/2026</span>
                     </div>
                 </div>
-
-                <!-- 2. Tiêu đề, Mã HĐ & Khách hàng -->
-                <div class="inv-title">HÓA ĐƠN THANH TOÁN</div>
-                <div class="inv-id" id="invIdDisplay">Mã HĐ: TP-XXXX</div>
-                <div class="inv-datetime" id="invDateTime">00:00 - 01/01/2026</div>
                 
+                <!-- 3. Thông tin Khách hàng -->
                 <div class="inv-customer" id="outCustomerDisplay">
+                    <!-- Dữ liệu JS -->
                 </div>
 
-                <!-- 3. Bảng dữ liệu -->
+                <!-- 4. Bảng dữ liệu -->
                 <div class="table-wrapper">
                     <table class="inv-table">
                         <thead>
                             <tr>
-                                <th style="width: 55%; text-align: left; padding-left: 10px;">Tên tài liệu</th>
-                                <th style="width: 20%;">Đơn giá</th>
-                                <th style="width: 25%; text-align: right; padding-right: 10px; white-space: nowrap;">Thành tiền</th>
+                                <th style="width: 55%; text-align: left; padding-left: 5px;">Tên tài liệu</th>
+                                <th style="width: 20%; text-align: center;">Đơn giá</th>
+                                <th style="width: 25%; text-align: right; padding-right: 5px;">Thành tiền</th>
                             </tr>
                         </thead>
                         <tbody id="invTableBody">
@@ -253,14 +273,14 @@
                     </table>
                 </div>
 
-                <!-- 4. Tổng kết & Ưu đãi -->
+                <!-- 5. Tổng kết -->
                 <div class="summary-section">
                     <div class="summary-row" id="invSubtotalRow" style="display: none;">
-                        <div>Tạm tính:</div>
+                        <div>Tạm tính</div>
                         <div id="invSubtotalAmount">0 đ</div>
                     </div>
                     <div class="summary-row discount" id="invDiscountRow" style="display: none;">
-                        <div>Ưu đãi:</div>
+                        <div>Ưu đãi</div>
                         <div id="invDiscountAmount">- 0 đ</div>
                     </div>
                     <div class="inv-total-wrapper">
@@ -269,22 +289,23 @@
                     </div>
                 </div>
 
-                <!-- 5. Thanh toán & Lời chúc -->
-                <div class="payment-section">
+                <!-- 6. Thanh toán & Ngân hàng -->
+                <div class="payment-card">
                     <div class="qr-box-inner">
                         <img src="ma-qr-cua-toi.jpg" alt="Mã QR" class="qr-img" onerror="this.src='https://via.placeholder.com/100?text=QR'">
                     </div>
                     <div class="bank-info">
-                        <div><span>Ngân hàng:</span> <strong>MB Bank</strong></div>
-                        <div><span>Tên chủ TK:</span> <strong>TRẦN GIA BẢO</strong></div>
+                        <div><span>Ngân hàng</span> <strong>MB Bank</strong></div>
+                        <div><span>Tên chủ TK</span> <strong style="color: #0F172A;">TRẦN GIA BẢO</strong></div>
                     </div>
                 </div>
                 
+                <!-- 7. Footer Cảm ơn -->
                 <div class="footer-note">
-                    <div class="thanks-text">Xin chân thành cảm ơn quý thầy cô !</div>
-                    <div class="wish-text">Kính chúc thầy cô sức khỏe và công tác tốt.</div>
+                    <div class="thanks-text">Xin chân thành cảm ơn!</div>
+                    <div class="wish-text">Kính chúc quý thầy cô sức khỏe và công tác tốt.</div>
                     <div class="support-text">
-                        Trường hợp File gặp vấn đề Quý thầy cô vui lòng liên hệ Zalo: <strong>0843.589.647</strong> để được hỗ trợ !
+                        Hỗ trợ khách hàng qua Zalo: <strong>0843.589.647</strong>
                     </div>
                 </div>
             </div>
@@ -321,12 +342,8 @@
     function toggleDiscountInput() {
         const hasDiscount = document.getElementById('hasDiscount').value;
         const discountInput = document.getElementById('discountAmount');
-        if (hasDiscount === 'yes') {
-            discountInput.style.display = 'block';
-        } else {
-            discountInput.style.display = 'none';
-            discountInput.value = ''; 
-        }
+        if (hasDiscount === 'yes') { discountInput.style.display = 'block'; } 
+        else { discountInput.style.display = 'none'; discountInput.value = ''; }
     }
 
     function calcRowSubtotal(index) {
@@ -342,13 +359,10 @@
         return `${pad(now.getHours())}:${pad(now.getMinutes())} - ${pad(now.getDate())}/${pad(now.getMonth() + 1)}/${now.getFullYear()}`;
     }
 
-    // Hàm tạo mã HĐ ngẫu nhiên (Ví dụ: TP-A4B9)
     function generateInvoiceID() {
         const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
         let result = 'TP-';
-        for (let i = 0; i < 4; i++) {
-            result += chars.charAt(Math.floor(Math.random() * chars.length));
-        }
+        for (let i = 0; i < 5; i++) { result += chars.charAt(Math.floor(Math.random() * chars.length)); }
         return result;
     }
 
@@ -377,29 +391,27 @@
             let displayPriceHtml = "";
             let subtotal = price;
             
-            // Xử lý Hàng tặng (Gạch ngang giá cũ)
             if (type === 'tang') {
-                name = `<strong style="color:#ef4444;">(Tặng)</strong> ${name}`;
-                displayPriceHtml = `<del style="color:#94A3B8; font-size: 13.5px;">${price.toLocaleString('vi-VN')} đ</del><br><span style="color:#ef4444; font-weight:700;">0 đ</span>`;
+                name = `<strong style="color:#059669; font-size:13px;">[QUÀ TẶNG]</strong><br>${name}`;
+                displayPriceHtml = `<del style="color:#94A3B8; font-size: 13px;">${price.toLocaleString('vi-VN')} đ</del><br><span style="color:#059669; font-weight:700;">0 đ</span>`;
                 subtotal = 0; 
             } else {
-                displayPriceHtml = `${price.toLocaleString('vi-VN')} đ`;
+                displayPriceHtml = `<span style="font-weight:600;">${price.toLocaleString('vi-VN')}</span>`;
             }
 
             itemTotal += subtotal;
 
             tbody.innerHTML += `
                 <tr>
-                    <td class="text-left" style="padding-left:10px;">${name}</td>
+                    <td class="text-left" style="padding-left:5px; font-weight:600;">${name}</td>
                     <td class="text-center">${displayPriceHtml}</td>
-                    <td class="text-right" style="padding-right:10px; font-weight:700; white-space: nowrap;">${subtotal.toLocaleString('vi-VN')} đ</td>
+                    <td class="text-right" style="padding-right:5px; font-weight:700; white-space: nowrap;">${subtotal.toLocaleString('vi-VN')} đ</td>
                 </tr>
             `;
         }
 
         if(hasError) { alert("Bạn điền thiếu thông tin tên tài liệu hoặc đơn giá!"); return; }
 
-        // --- XỬ LÝ ƯU ĐÃI (DISCOUNT) ---
         let discount = 0;
         if (document.getElementById('hasDiscount').value === 'yes') {
             discount = parseFloat(document.getElementById('discountAmount').value) || 0;
@@ -420,15 +432,13 @@
 
         document.getElementById('invGrandTotal').innerText = grandTotal.toLocaleString('vi-VN') + " đ";
 
-        // --- ĐIỀN THÔNG TIN ---
-        let customerHtml = `<div><span class="label-blue">Khách hàng:</span> <span class="val-normal">${customerTitle} ${customerName}</span></div>`;
-        if(phone) customerHtml += `<div><span class="label-blue">Điện thoại:</span> <span class="val-normal">${phone}</span></div>`;
-        if(email) customerHtml += `<div><span class="label-blue">Email:</span> <span class="val-normal">${email}</span></div>`;
+        // Style thông tin khách hàng tinh tế
+        let customerHtml = `<div class="customer-row"><span class="c-label">Tên KH</span> <span class="c-value">${customerTitle} ${customerName}</span></div>`;
+        if(phone) customerHtml += `<div class="customer-row"><span class="c-label">Điện thoại</span> <span class="c-value">${phone}</span></div>`;
+        if(email) customerHtml += `<div class="customer-row"><span class="c-label">Email</span> <span class="c-value">${email}</span></div>`;
         
         document.getElementById('outCustomerDisplay').innerHTML = customerHtml;
-        
-        // Sinh mã HĐ tự động và ngày giờ
-        document.getElementById('invIdDisplay').innerText = `Mã HĐ: ${generateInvoiceID()}`;
+        document.getElementById('invIdDisplay').innerText = generateInvoiceID();
         document.getElementById('invDateTime').innerText = getFormattedDateTime();
 
         document.getElementById('invoiceScroll').style.display = 'block';
@@ -457,25 +467,24 @@
                     const item = new ClipboardItem({ "image/png": blob });
                     navigator.clipboard.write([item]).then(function() {
                         btn.innerText = "✅ Đã Copy Thành Công!";
-                        btn.style.backgroundColor = "#16A34A"; 
+                        btn.style.backgroundColor = "#059669"; 
                         btn.disabled = false;
-                        setTimeout(() => { alert("Ảnh hóa đơn đã được lưu vào bộ nhớ tạm. Bạn có thể dán (Paste) vào Zalo/Facebook ngay!"); }, 100);
+                        setTimeout(() => { alert("Ảnh hóa đơn đã được lưu vào bộ nhớ tạm. Paste vào Zalo ngay!"); }, 100);
                     }).catch(function(err) {
-                        console.error(err);
-                        alert("Trình duyệt không hỗ trợ copy tự động. Bạn hãy nhấn giữ vào hóa đơn bên trên và chọn 'Sao chép hình ảnh' nhé!");
+                        alert("Vui lòng nhấn giữ vào hóa đơn bên trên và chọn 'Sao chép hình ảnh'!");
                         btn.innerText = "📋 Lưu & Copy Ảnh Hóa Đơn";
                         btn.style.backgroundColor = "#0F172A";
                         btn.disabled = false;
                     });
                 } catch (error) {
-                    alert("Tính năng copy chưa được hỗ trợ trên trình duyệt này!");
+                    alert("Trình duyệt không hỗ trợ, vui lòng nhấn giữ để copy ảnh.");
                     btn.innerText = "📋 Lưu & Copy Ảnh Hóa Đơn";
                     btn.style.backgroundColor = "#0F172A";
                     btn.disabled = false;
                 }
             }, "image/png");
         }).catch(err => {
-            alert("Lỗi tạo ảnh. Đảm bảo bạn đã up file ảnh logo/QR lên mạng chưa nhé!");
+            alert("Lỗi! Đảm bảo up file logo/QR lên mạng.");
             btn.innerText = "📋 Lưu & Copy Ảnh Hóa Đơn";
             btn.disabled = false;
         });
