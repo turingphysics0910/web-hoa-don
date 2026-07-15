@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Hóa Đơn Cute - TURING PHYSICS</title>
+    <title>Hóa Đơn - TURING PHYSICS</title>
     
-    <!-- Dùng 2 Font siêu đáng yêu: Baloo 2 (Cho tiêu đề) và Nunito (Cho nội dung) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
@@ -17,7 +16,7 @@
         body { 
             font-family: 'Nunito', sans-serif; 
             padding: 20px 15px; 
-            background-color: #F0F8FF; /* Màu nền web: Xanh Alice Blue mát mắt */
+            background-color: #F0F8FF; 
             color: #4A4A4A; 
             line-height: 1.6;
         }
@@ -29,7 +28,7 @@
             padding: 30px 25px; 
             border-radius: 25px; 
             box-shadow: 0 10px 30px rgba(135, 206, 235, 0.3); 
-            border: 3px dashed #87CEEB; /* Viền đứt khúc xanh mây */
+            border: 3px dashed #87CEEB; 
         }
         h2 { 
             text-align: center; color: #1E90FF; margin-bottom: 25px; 
@@ -68,7 +67,7 @@
         .btn-copy { background: linear-gradient(135deg, #74ebd5, #9face6); color: white; margin-top: 30px; display: none; box-shadow: 0 5px 15px rgba(116, 235, 213, 0.4);}
         .btn-copy:hover { transform: translateY(-2px); }
 
-        /* ================= KHU VỰC PHÔI HÓA ĐƠN (CUTE STYLE) ================= */
+        /* ================= KHU VỰC PHÔI HÓA ĐƠN ================= */
         .invoice-scroll-wrapper { width: 100%; overflow-x: auto; margin-top: 40px; padding-bottom: 20px; display: none; }
 
         #invoice-box {
@@ -81,7 +80,7 @@
             padding: 30px;
         }
         
-        /* 1. Header Đáng Yêu (Bong Bóng) */
+        /* 1. Header */
         .inv-header { 
             background: linear-gradient(135deg, #A1C4FD 0%, #C2E9FB 100%);
             border-radius: 20px; padding: 20px; text-align: center;
@@ -109,25 +108,25 @@
             padding: 6px 15px; border-radius: 20px; border: 1px dashed #87CEEB;
         }
 
-        /* 3. Thông tin Khách hàng (Thẻ mây) */
+        /* 3. Thông tin Khách hàng */
         .inv-customer { 
             background: #F4FAFF; border-radius: 20px; padding: 18px 20px;
             margin-bottom: 25px; border: 2px dashed #B0E0E6;
         }
         .customer-row { 
-            display: flex; margin-bottom: 8px; font-size: 15px; align-items: baseline;
-            white-space: nowrap; /* BẮT BUỘC TRÊN 1 DÒNG */
+            display: flex; margin-bottom: 8px; font-size: 15px; align-items: baseline; gap: 10px;
         }
         .customer-row:last-child { margin-bottom: 0; }
-        .c-label { color: #5C9CE6; font-weight: 800; width: 85px; flex-shrink: 0;}
+        /* Đã xóa width cố định, dùng flex-shrink để nhãn không bị co và không đè chữ */
+        .c-label { color: #5C9CE6; font-weight: 800; white-space: nowrap; flex-shrink: 0;}
         .c-value { 
             color: #4A4A4A; font-weight: 700; 
-            white-space: nowrap; /* BẮT BUỘC TRÊN 1 DÒNG */
+            white-space: nowrap; 
             overflow: hidden; 
-            text-overflow: ellipsis; /* Hiển thị ... nếu tên quá dài */
+            text-overflow: ellipsis; 
         } 
 
-        /* 4. Bảng dữ liệu (Kiểu Bubble Rows) */
+        /* 4. Bảng dữ liệu */
         .inv-table { 
             width: 100%; border-collapse: separate; border-spacing: 0 8px; 
             font-size: 14px; margin-bottom: 15px; 
@@ -135,6 +134,7 @@
         .inv-table th { 
             color: #1E90FF; padding: 10px 15px; font-size: 14px; font-weight: 800; 
             background: #E6F5FF; border-radius: 12px; font-family: 'Baloo 2', cursive;
+            white-space: nowrap; /* BẮT BUỘC HEADER TRÊN 1 DÒNG */
         }
         .inv-table td { 
             padding: 15px; background: #FAFAFA; color: #4A4A4A; font-weight: 600;
@@ -161,7 +161,7 @@
         .inv-total-text { font-size: 16px; font-weight: 800; color: #1E90FF; font-family: 'Baloo 2', cursive;}
         .inv-total-box { font-size: 24px; font-weight: 900; color: #00509E; font-family: 'Baloo 2', cursive;}
 
-        /* 6. Khu vực Thanh toán & Ngân hàng (Thẻ Cute) */
+        /* 6. Khu vực Thanh toán */
         .payment-card {
             display: flex; align-items: center; justify-content: flex-start; gap: 20px;
             background: #F5FFFA; padding: 15px 20px; border-radius: 20px; margin-bottom: 25px; 
@@ -176,7 +176,7 @@
         .bank-row span { color: #A9A9A9; width: 85px; font-size: 13px; font-weight: 700;}
         .bank-row strong { color: #4A4A4A; font-weight: 800; font-size: 15px; }
 
-        /* 7. Footer Cảm ơn */
+        /* 7. Footer */
         .footer-note { text-align: center; border-top: 2px dashed #D4EBF8; padding-top: 20px;}
         .thanks-text { font-size: 20px; font-weight: 800; color: #1E90FF; margin-bottom: 4px; font-family: 'Baloo 2', cursive; }
         .wish-text { font-size: 14px; color: #A9A9A9; margin-bottom: 15px; font-weight: 600;}
@@ -238,39 +238,36 @@
     <div class="invoice-scroll-wrapper" id="invoiceScroll">
         <div id="invoice-box">
             
-            <!-- 1. Header Kẹo Ngọt -->
             <div class="inv-header">
                 <img src="turing-physics.jpg" alt="Logo" class="inv-avatar" onerror="this.src='https://via.placeholder.com/75?text=TP'">
                 <div class="inv-brand-name">TURING PHYSICS</div>
                 <div class="inv-brand-sub">Tài liệu Vật Lý THPT siêu xịn</div>
             </div>
 
-            <!-- 2. Tiêu đề & Badges -->
-            <div class="inv-title">💧 HÓA ĐƠN MUA SẮM 💧</div>
+            <!-- Đổi Icon sang hình thoi nghiêm túc hơn -->
+            <div class="inv-title">🔹 HÓA ĐƠN MUA SẮM 🔹</div>
             <div class="inv-meta-grid">
                 <div class="meta-badge" id="invIdDisplay">🆔 #TP-XXXX</div>
                 <div class="meta-badge" id="invDateTime">📅 01/01/2026</div>
             </div>
 
-            <!-- 3. Khách hàng -->
             <div class="inv-customer" id="outCustomerDisplay">
                 <!-- Dữ liệu JS -->
             </div>
 
-            <!-- 4. Bảng dữ liệu -->
             <table class="inv-table">
                 <thead>
                     <tr>
-                        <th class="text-left">☁️ Tên tài liệu</th>
-                        <th class="text-right">💰 Đơn giá</th>
-                        <th class="text-right">✨ Thành tiền</th>
+                        <!-- Loại bỏ emoji gây mất nghiêm túc ở header -->
+                        <th class="text-left">Tên tài liệu</th>
+                        <th class="text-right">Đơn giá</th>
+                        <th class="text-right">Thành tiền</th>
                     </tr>
                 </thead>
                 <tbody id="invTableBody">
                 </tbody>
             </table>
 
-            <!-- 5. Tổng kết -->
             <div class="summary-section">
                 <div class="summary-row" id="invSubtotalRow" style="display: none;">
                     <div>Tạm tính:</div>
@@ -286,22 +283,20 @@
                 </div>
             </div>
 
-            <!-- 6. Thanh toán & Ngân hàng -->
             <div class="payment-card">
                 <div class="qr-box-inner">
                     <img src="ma-qr-cua-toi.jpg" alt="Mã QR" class="qr-img" onerror="this.src='https://via.placeholder.com/95?text=QR'">
                 </div>
                 <div class="bank-info">
-                    <div class="bank-heading">💳 Chuyển khoản cho mình nha</div>
+                    <div class="bank-heading">💳 Thông tin thanh toán</div>
                     <div class="bank-row"><span>Ngân hàng:</span> <strong>MB Bank</strong></div>
                     <div class="bank-row"><span>Chủ TK:</span> <strong>TRẦN GIA BẢO</strong></div>
                 </div>
             </div>
             
-            <!-- 7. Footer Cảm ơn -->
             <div class="footer-note">
-                <div class="thanks-text">Cảm ơn bạn nhiều nha! 🥰</div>
-                <div class="wish-text">Chúc thầy/cô một ngày thật nhiều niềm vui và may mắn ☁️</div>
+                <div class="thanks-text">Trân trọng cảm ơn!</div>
+                <div class="wish-text">Kính chúc Thầy/Cô một ngày làm việc hiệu quả và nhiều niềm vui 🔹</div>
                 <div class="support-text">
                     Hỗ trợ Zalo: <strong>0843.589.647</strong>
                 </div>
@@ -390,7 +385,6 @@
             let subtotal = price;
             
             if (type === 'tang') {
-                /* Đổi màu nhãn tặng sang xanh dương đồng bộ */
                 name = `<strong style="color:#00509E; font-size:13px; margin-right:5px; background: #E6F5FF; padding: 3px 8px; border-radius: 10px;">🎁 TẶNG</strong> ${name}`;
                 displayPriceHtml = `<del style="color:#A9A9A9; font-size: 12px; font-weight: 600;">${price.toLocaleString('vi-VN')}</del><br><span style="color:#32CD32; font-weight:800;">0</span>`;
                 subtotal = 0; 
